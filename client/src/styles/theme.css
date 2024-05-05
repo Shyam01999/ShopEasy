@@ -1,0 +1,10 @@
+/* Theme Rule */
+:root {
+  --bg-color:#1f242d;
+  --text-color: #fff;
+  --logo-color:#12D8FA;
+  --main-color: linear-gradient(to right, #1FA2FF 0%, #12D8FA 51%, #1FA2FF 100%);
+  --btn-color: #646cff;
+  --menu-color:#2AF598;
+  --fb-logo: #0866FF;
+  }
