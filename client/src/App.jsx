@@ -8,11 +8,15 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from './components/NotFound/NotFound';
 import { useEffect } from 'react';
 import { notifySuccess } from './constant/toastAlerts';
+import Login from './components/Authentication/Login/Login';
+import Signup from './components/Authentication/Signup/Signup';
+import Forgetpassword from './components/Authentication/Forgetpassword/Forgetpassword';
+import Resetpassword from './components/Authentication/Resetpassword/Resetpassword';
 
 function App() {
-  useEffect(()=>{
-    notifySuccess("Welcome to Shop Ease App")
-  },[])
+  // useEffect(()=>{
+  //   notifySuccess("Welcome to Shop Ease App")
+  // },[])
 
   return (
     <>
@@ -20,7 +24,10 @@ function App() {
      <Button variant="contained">Hello world</Button>
      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<NotFound />} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/signup" element={<Signup/>} />
+          <Route path="/forgetpassword" element={<Forgetpassword/>} />
+          <Route path="/resetpassword" element={<Resetpassword/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter> 
