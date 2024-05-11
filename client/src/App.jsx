@@ -10,8 +10,8 @@ import { useEffect } from 'react';
 import { notifySuccess } from './constant/toastAlerts';
 import Login from './components/Authentication/Login/Login';
 import Signup from './components/Authentication/Signup/Signup';
-import Forgetpassword from './components/Authentication/Forgetpassword/Forgetpassword';
 import Resetpassword from './components/Authentication/Resetpassword/Resetpassword';
+import Forgotpassword from './components/Authentication/Forgotpassword/Forgotpassword';
 
 function App() {
   // useEffect(()=>{
@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
-          <Route path="/forgetpassword" element={<Forgetpassword/>} />
+          <Route path="/forgotpassword" element={<Forgotpassword/>} />
           <Route path="/resetpassword" element={<Resetpassword/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
