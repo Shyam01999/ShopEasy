@@ -12,6 +12,7 @@ import Login from './components/Authentication/Login/Login';
 import Signup from './components/Authentication/Signup/Signup';
 import Resetpassword from './components/Authentication/Resetpassword/Resetpassword';
 import Forgotpassword from './components/Authentication/Forgotpassword/Forgotpassword';
+import Home from './components/Home/Home';
 
 function App() {
   // useEffect(()=>{
@@ -20,11 +21,10 @@ function App() {
 
   return (
     <>
-
-     <Button variant="contained">Hello world</Button>
      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login/>} />
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/forgotpassword" element={<Forgotpassword/>} />
           <Route path="/resetpassword" element={<Resetpassword/>} />
