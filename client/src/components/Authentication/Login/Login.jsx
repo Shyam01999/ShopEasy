@@ -67,7 +67,7 @@ function Login() {
                       <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h4">
-                      Sign in
+                      Welcome
                     </Typography>
                     <Box
                       component="form"
