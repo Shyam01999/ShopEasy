@@ -89,7 +89,7 @@ function Login() {
                         id="email"
                         label="Email Address"
                         name="email"
-                        autoComplete="email"
+                        // autoComplete="email"
                         required
                         value={values.email}
                         onChange={handleChange}
