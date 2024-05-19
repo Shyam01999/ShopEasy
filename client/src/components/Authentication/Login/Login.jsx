@@ -13,8 +13,9 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
+  createTheme,
+  ThemeProvider,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
 import Copyright from "../../../constant/copyright";

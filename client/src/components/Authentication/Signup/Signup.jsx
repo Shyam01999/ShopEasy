@@ -1,35 +1,58 @@
 import { useState } from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Container, Grid } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Avatar from "@mui/material/Avatar";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
+import {
+  Backdrop,
+  Box,
+  Modal,
+  Fade,
+  Button,
+  Typography,
+  Container,
+  Grid,
+  createTheme,
+  ThemeProvider,
+  Avatar,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
 import Copyright from "../../../constant/copyright";
+import { useFormik } from "formik";
+import { signupSchema } from "../../../schemas";
+
 const defaultTheme = createTheme();
 function Signup() {
   const [open, setOpen] = useState(true);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log("data",data);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log("data", data);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  // };
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        username: "",
+        email: "",
+        password: "",
+        mobilenumber: "",
+      },
+      validationSchema: signupSchema,
+      onSubmit: (values, action) => {
+        console.log("values", values);
+        action.resetForm();
+      },
     });
-  };
+
   return (
     <div>
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
@@ -70,50 +93,81 @@ function Signup() {
                     <Box
                       component="form"
                       onSubmit={handleSubmit}
-                      noValidate
-                      sx={{ fontSize: "1rem", mt: 1 }}
+                      // noValidate
+                      // sx={{ fontSize: "1rem", mt: 1 }}
                     >
                       <TextField
-                        // margin="normal"
-                        required
+                        type="text"
+                        margin="normal"
                         fullWidth
                         id="username"
                         label="Username"
-                        type="text"
                         name="username"
                         autoComplete="username"
-                        autoFocus
+                        required
+                        value={values.username}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={
+                          Boolean(touched.username) && Boolean(errors.username)
+                        }
+                        helperText={
+                          Boolean(touched.username) && errors.username
+                        }
                       />
                       <TextField
+                        type="email"
                         margin="normal"
-                        required
                         fullWidth
                         id="email"
                         label="Email Address"
-                        type="email"
                         name="email"
                         autoComplete="email"
-                        autoFocus
+                        required
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={Boolean(touched.email) && Boolean(errors.email)}
+                        helperText={Boolean(touched.email) && errors.email}
                       />
                       <TextField
+                        type="password"
                         margin="normal"
-                        required
                         fullWidth
                         name="password"
                         label="Password"
-                        type="password"
                         id="password"
                         autoComplete="Password"
+                        required
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={
+                          Boolean(touched.password) && Boolean(errors.password)
+                        }
+                        helperText={
+                          Boolean(touched.password) && errors.password
+                        }
                       />
                       <TextField
+                        type="number"
                         margin="normal"
-                        required
                         fullWidth
                         name="mobilenumber"
                         label="Mobile number"
-                        type="number"
                         id="mobilenumber"
                         autoComplete="mobilenumber"
+                        required
+                        value={values.mobilenumber}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={
+                          Boolean(touched.mobilenumber) &&
+                          Boolean(errors.mobilenumber)
+                        }
+                        helperText={
+                          Boolean(touched.mobilenumber) && errors.mobilenumber
+                        }
                       />
                       <Button
                         type="submit"
@@ -141,7 +195,7 @@ function Signup() {
         </Fade>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;

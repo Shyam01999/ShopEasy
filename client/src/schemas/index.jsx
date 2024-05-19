@@ -14,6 +14,7 @@ export const signupSchema = Yup.object({
 //     .min(10)
 //     .max(12)
 //     .required("Please enter your password"),
+  mobilenumber: Yup.string().min(10).max(12).required("Please enter your mobilenumber"),
 });
 
 export const forgotpasswordSchema = Yup.object({
@@ -22,7 +23,7 @@ export const forgotpasswordSchema = Yup.object({
 
 export const resetpasswordSchema = Yup.object({
   password: Yup.string().min(6).required("Please enter your password"),
-  confirmpassword: Yup.string()
+  confirmPassword: Yup.string()
     .required("Please enter your password")
     .oneOf([Yup.ref("password"), null], "Password must match"),
 });
