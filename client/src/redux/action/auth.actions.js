@@ -6,7 +6,7 @@ import { FETCH_LOGIN_DATA } from "../actionTypes/auth.actionTypes";
 //Login Action 
 export const login = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/auth/login', reqbodydata);
+        const res = await axios.post('/api/auth/login', reqbodydata);
 
         // Optionally, navigate to another page upon successful login
         navigate('/');
