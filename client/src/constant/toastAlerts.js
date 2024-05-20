@@ -12,7 +12,7 @@ export const notifySuccess = (message) =>
     progress: undefined,
     theme: "light",
     style: {
-      fontSize: "1.5rem", // Set your desired font size
+      fontSize: "1rem", // Set your desired font size
     },
   });
 
@@ -28,7 +28,7 @@ export const notifyError = (message) =>
     progress: undefined,
     theme: "light",
     style: {
-      fontSize: "1.5rem", // Set your desired font size
+      fontSize: "1rem", // Set your desired font size
     },
   });
 
@@ -44,7 +44,7 @@ export const notifyWarning = (message) => {
     progress: undefined,
     theme: "light",
     style: {
-      fontSize: "1.5rem", // Set your desired font size
+      fontSize: "1rem", // Set your desired font size
     },
   });
 }

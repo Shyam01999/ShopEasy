@@ -21,6 +21,10 @@ import { Link } from "react-router-dom";
 import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { loginSchema } from "../../../schemas";
+import { useDispatch } from "react-redux";
+import { login } from "../../../redux/action/auth.actions";
+import { useNavigate } from "react-router-dom";
+
 const defaultTheme = createTheme();
 
 function Login() {
@@ -28,15 +32,18 @@ function Login() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        email: "",
-        password: "",
+        email: "shyamsundarsahoo@gmail.com",
+        password: "1234567",
       },
       validationSchema: loginSchema,
       onSubmit: (values, action) => {
-        console.log("values", values);
+        dispatch(login(values, navigate));
         action.resetForm();
       },
     });
