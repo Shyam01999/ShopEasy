@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { signupSchema } from "../../../schemas";
+import MetaData from "../../../constant/MetaData";
 
 const defaultTheme = createTheme();
 function Signup() {
@@ -55,6 +56,7 @@ function Signup() {
 
   return (
     <div>
+      <MetaData title="ShopEasy Signup"/>
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
       <Modal
         aria-labelledby="transition-modal-title"

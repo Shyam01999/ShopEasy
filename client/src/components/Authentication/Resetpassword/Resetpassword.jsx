@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { resetpasswordSchema } from "../../../schemas";
+import MetaData from "../../../constant/MetaData";
 
 const defaultTheme = createTheme();
 
@@ -54,6 +55,7 @@ function Resetpassword() {
 
   return (
     <div>
+      <MetaData title="ShopEasy Resetpassword"/>
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
       <Modal
         aria-labelledby="transition-modal-title"

@@ -24,6 +24,7 @@ import { loginSchema } from "../../../schemas";
 import { useDispatch } from "react-redux";
 import { login } from "../../../redux/action/auth.actions";
 import { useNavigate } from "react-router-dom";
+import MetaData from "../../../constant/MetaData";
 
 const defaultTheme = createTheme();
 
@@ -50,6 +51,7 @@ function Login() {
 
   return (
     <div>
+      <MetaData title="ShopEasy Login"/>
       <Button onClick={handleOpen}>Login Modal</Button>
       <Modal
         aria-labelledby="transition-modal-title"
