@@ -10,8 +10,8 @@ const sequelize = new Sequelize(
     port: dbConfig.port,
     dialect: dbConfig.dialect,
     logging: dbConfig.logging,
-    ssl:dbConfig.ssl, //for ssl true case uncomment
-    dialectOptions : dbConfig.dialectOptions, //for sslrequire true case uncomment
+    //ssl:dbConfig.ssl, //for ssl true case uncomment
+    //dialectOptions : dbConfig.dialectOptions, //for sslrequire true case uncomment
     
 
     pool: {

@@ -7,9 +7,9 @@ import { FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA } from "../actionTypes/auth.actionT
 export const login = (reqbodydata, navigate) => async (dispatch) => {
     try {
         const res = await axios.post('/api/auth/login', reqbodydata);
-
+        console.log("login res",res)
         // Optionally, navigate to another page upon successful login
-        if (res.statusText == "OK") {
+        if (res.data.message == 'Login Successful') {
             dispatch({ type: FETCH_LOGIN_DATA, payload: res.data });
             const loginData = res.data;
             Cookies.set('loginData', JSON.stringify(loginData), { expires: 7, path: '/' });
@@ -28,9 +28,9 @@ export const login = (reqbodydata, navigate) => async (dispatch) => {
 //Signup Action
 export const signup = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('/api/auth/register', reqbodydata);
+        const res = await axios.post('http://localhost:8080/api/auth/register', reqbodydata);
         console.log("signup res", res);
-        if (res.statusText == "OK") {
+        if (res.statusText == "Created") {
             dispatch({ type: FETCH_SIGNUP_DATA, payload: res.data });
             const loginData = res.data;
             Cookies.set('loginData', JSON.stringify(loginData), { expires: 7, path: '/' });

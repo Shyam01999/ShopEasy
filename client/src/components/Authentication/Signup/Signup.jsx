@@ -56,7 +56,7 @@ function Signup() {
       onSubmit: (values, action) => {
         console.log("values", values);
         dispatch(signup(values, navigate));
-        action.resetForm();
+        // action.resetForm();
       },
     });
 
