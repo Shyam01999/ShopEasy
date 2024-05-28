@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { FETCH_LOGIN_DATA } from '../actionTypes/auth.actionTypes';
+import { FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA } from '../actionTypes/auth.actionTypes';
 // const storedToken = localStorage.getItem('token');
 const storedToken = Cookies.get('loginData');
 // const storedUserData = localStorage.getItem('userData');
@@ -15,6 +15,10 @@ export const authReducer = (state = authState, { type, payload }) => {
     switch (type) {
 
         case FETCH_LOGIN_DATA: {
+            return { ...state, token: payload.token, userData: payload.userData };
+        }
+
+        case FETCH_SIGNUP_DATA: {
             return { ...state, token: payload.token, userData: payload.userData };
         }
 

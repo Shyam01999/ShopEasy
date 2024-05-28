@@ -17,16 +17,21 @@ import {
   Checkbox,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { signupSchema } from "../../../schemas";
 import MetaData from "../../../constant/MetaData";
+import { useDispatch } from "react-redux";
+import { signup } from "../../../redux/action/auth.actions";
 
 const defaultTheme = createTheme();
 function Signup() {
   const [open, setOpen] = useState(true);
   // const handleOpen = () => setOpen(true);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleClose = () => setOpen(false);
 
   // const handleSubmit = (event) => {
@@ -50,13 +55,14 @@ function Signup() {
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
         console.log("values", values);
+        dispatch(signup(values, navigate));
         action.resetForm();
       },
     });
 
   return (
     <div>
-      <MetaData title="ShopEasy Signup"/>
+      <MetaData title="ShopEasy Signup" />
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
       <Modal
         aria-labelledby="transition-modal-title"
