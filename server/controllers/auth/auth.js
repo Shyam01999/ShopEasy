@@ -16,6 +16,7 @@ const register = async (req, res) => {
   try {
     let { username, email, password, mobilenumber, role } = req.body;
     //user default role
+    mobilenumber = mobilenumber.toString();
     const defaultrole = 'user';
     role = role || defaultrole;
 

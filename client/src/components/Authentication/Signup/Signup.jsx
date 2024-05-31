@@ -24,6 +24,7 @@ import { signupSchema } from "../../../schemas";
 import MetaData from "../../../constant/MetaData";
 import { useDispatch } from "react-redux";
 import { signup } from "../../../redux/action/auth.actions";
+import axios from "axios";
 
 const defaultTheme = createTheme();
 function Signup() {
@@ -51,11 +52,16 @@ function Signup() {
         email: "",
         password: "",
         mobilenumber: "",
+        role:"user"
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
         console.log("values", values);
-        dispatch(signup(values, navigate));
+        // dispatch(signup(values, navigate));
+        axios.post('http://localhost:8080/api/auth/register', values )
+        .then((res) => console.log("res",res))
+        .catch((e) => console.log(e))
+        
         // action.resetForm();
       },
     });

@@ -15,6 +15,9 @@ import {
   Checkbox,
   createTheme,
   ThemeProvider,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
@@ -25,16 +28,26 @@ import { useDispatch } from "react-redux";
 import { login } from "../../../redux/action/auth.actions";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../../../constant/MetaData";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const defaultTheme = createTheme();
 
 function Login() {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -51,7 +64,7 @@ function Login() {
 
   return (
     <div>
-      <MetaData title="ShopEasy Login"/>
+      <MetaData title="ShopEasy Login" />
       <Button onClick={handleOpen}>Login Modal</Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -108,7 +121,7 @@ function Login() {
                         helperText={Boolean(touched.email) && errors.email}
                       />
                       <TextField
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         margin="normal"
                         fullWidth
                         name="password"
@@ -125,7 +138,25 @@ function Login() {
                         helperText={
                           Boolean(touched.password) && errors.password
                         }
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                              >
+                                {showPassword ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
                       />
+                      
                       <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
