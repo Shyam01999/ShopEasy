@@ -6,7 +6,7 @@ const { isAuthenticated, authorizeRole } = require("../../middleware/auth");
 const authRouter = express.Router();
 
 authRouter.route('/register').post(validate(registerSchema), authController.register); 
-authRouter.route('/login').post(validate(loginSchema), authController.login);
+authRouter.route('/login').post(authController.login);
 authRouter.route('/logout').get(isAuthenticated, authController.logout);
 authRouter.route('/allusers').get(isAuthenticated, authorizeRole("admin"), authController.getAllUsers);
 authRouter.route('/update/user').post(isAuthenticated, authorizeRole("admin"), authController.updateUser);

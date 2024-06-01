@@ -28,13 +28,13 @@ const register = async (req, res) => {
     // Check if the email already exists in the database
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(400).json({ message: 'User with this email already exists' });
+      return res.json({ message: 'User with this email already exists' });
     }
 
     // Check if the mobile number already exists in the database
     const existingMobileUser = await User.findOne({ where: { mobilenumber } });
     if (existingMobileUser) {
-      return res.status(400).json({ message: 'User with this mobile number already exists' });
+      return res.json({ message: 'User with this mobile number already exists' });
     }
 
     // If email and mobile number are unique, proceed with user registration
@@ -43,11 +43,11 @@ const register = async (req, res) => {
     if (newUser) {
       sendToken(email, "Registration Successful", 201, newUser, res)
     } else {
-      res.status(500).json({ error: 'Registration failed' });
+      res.json({ error: 'Registration failed' });
     }
   } catch (error) {
     console.error('Error creating user:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.json({ error: 'Internal Server Error' });
   }
 };
 
@@ -98,7 +98,8 @@ const logout = async (req, res, next) => {
     res.status(200).cookie("token", null, options).json({ message: "Loggedout Successfully" })
   }
   catch (error) {
-    errorMiddleware(error, req, res, next);
+    // errorMiddleware(error, req, res, next);
+    console.log(error)
   }
 }
 

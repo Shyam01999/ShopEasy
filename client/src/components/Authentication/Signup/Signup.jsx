@@ -48,19 +48,16 @@ function Signup() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        username: "",
-        email: "",
-        password: "",
-        mobilenumber: "",
+        username: "Admin",
+        email: "admin@gmail.com",
+        password: "1234567",
+        mobilenumber: "9337757672",
         role:"user"
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
         console.log("values", values);
-        // dispatch(signup(values, navigate));
-        axios.post('http://localhost:8080/api/auth/register', values )
-        .then((res) => console.log("res",res))
-        .catch((e) => console.log(e))
+        dispatch(signup(values, navigate));
         
         // action.resetForm();
       },
