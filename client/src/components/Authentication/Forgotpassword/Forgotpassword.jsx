@@ -20,11 +20,17 @@ import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { forgotpasswordSchema } from "../../../schemas";
 import MetaData from "../../../constant/MetaData";
+import { useDispatch } from "react-redux";
+import { forgotpassword } from "../../../redux/action/auth.actions";
+import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
 function Forgotpassword() {
   const [open, setOpen] = useState(true);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -35,14 +41,14 @@ function Forgotpassword() {
       },
       validationSchema: forgotpasswordSchema,
       onSubmit: (values, action) => {
-        console.log("values", values);
+        dispatch(forgotpassword(values, navigate));
         action.resetForm();
       },
     });
 
   return (
     <div>
-      <MetaData title="ShopEasy forgotpassword"/>
+      <MetaData title="ShopEasy forgotpassword" />
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
       <Modal
         aria-labelledby="transition-modal-title"

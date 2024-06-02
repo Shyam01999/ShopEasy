@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const sendToken = require('../../utils/sendToken');
-const {User} = require("../../models");
+const { User } = require("../../models");
 const errorMiddleware = require('../../middleware/error-middleware');
 const sendEmail = require('../../utils/sendEmail');
 const crypto = require('crypto');
@@ -121,7 +121,9 @@ const forgotPassword = async (req, res, next) => {
     // Save the user instance to persist the reset token and expiry time
     await user.save({ validateBeforeSave: false });
 
-    const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/auth/password/reset/${resetToken}`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/auth/password/reset/${resetToken}`;
+    // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/resetpassword/${resetToken}`;
+    const resetPasswordUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
 
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
 
@@ -153,10 +155,9 @@ const forgotPassword = async (req, res, next) => {
 // //   Reset Password Controller
 // // ****************************
 const resetPassword = async (req, res, next) => {
-
   //creating token hash 
   const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
-
+  
   // Find user by reset token and check expiration
   const user = await User.findOne({
     where: {
@@ -166,11 +167,11 @@ const resetPassword = async (req, res, next) => {
   });
 
   if (!user) {
-    return res.status(400).json({ message: 'Reset Password token is invalid or has been expired' });
+    return res.json({ message: 'Reset Password token is invalid or has been expired' });
   }
 
   if (req.body.password != req.body.confirmPassword) {
-    return res.status(400).json({ message: 'Password does not match' });
+    return res.json({ message: 'Password does not match' });
   }
 
   // Update user's password

@@ -52,8 +52,8 @@ function Login() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        email: "shyamsundarsahoo@gmail.com",
-        password: "1234567",
+        email: "",
+        password: "",
       },
       validationSchema: loginSchema,
       onSubmit: (values, action) => {

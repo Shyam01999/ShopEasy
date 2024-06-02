@@ -22,23 +22,21 @@ import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { resetpasswordSchema } from "../../../schemas";
 import MetaData from "../../../constant/MetaData";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { notifyError, notifySuccess } from "../../../constant/toastAlerts";
 
 const defaultTheme = createTheme();
 
 function Resetpassword() {
   const [open, setOpen] = useState(true);
+
+  const { token } = useParams();
+  const navigate = useNavigate();
+
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log("data",data);
-  //   console.log({
-  //     email: data.get("email"),
-  //     password: data.get("password"),
-  //   });
-  // };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -47,15 +45,32 @@ function Resetpassword() {
         confirmPassword: "",
       },
       validationSchema: resetpasswordSchema,
-      onSubmit: (values, action) => {
-        console.log("values", values);
+      onSubmit: async (values, action) => {
+        try {
+          const res = await axios.put(
+            `http://localhost:8080/api/auth/password/reset/${token}`,
+            {
+              password: values.password,
+              confirmPassword: values.confirmPassword,
+            }
+          );
+          if (res.data.message === "Password reset successful") {
+            notifySuccess(res.data.message);
+            navigate("/");
+          } else {
+            notifyError(res.data.message);
+          }
+          // alert("Password has been updated successfully");
+        } catch (error) {
+          console.log("Error in reset password", error);
+        }
         action.resetForm();
       },
     });
 
   return (
     <div>
-      <MetaData title="ShopEasy Resetpassword"/>
+      <MetaData title="ShopEasy Resetpassword" />
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
       <Modal
         aria-labelledby="transition-modal-title"
@@ -94,7 +109,7 @@ function Resetpassword() {
                     <Box
                       component="form"
                       onSubmit={handleSubmit}
-                      noValidate
+                      // noValidate
                       sx={{ fontSize: "1rem", mt: 1 }}
                     >
                       <TextField
@@ -129,10 +144,12 @@ function Resetpassword() {
                         onChange={handleChange}
                         onBlur={handleBlur}
                         error={
-                          Boolean(touched.confirmPassword) && Boolean(errors.confirmPassword)
+                          Boolean(touched.confirmPassword) &&
+                          Boolean(errors.confirmPassword)
                         }
                         helperText={
-                          Boolean(touched.confirmPassword) && errors.confirmPassword
+                          Boolean(touched.confirmPassword) &&
+                          errors.confirmPassword
                         }
                       />
                       <Button

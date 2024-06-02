@@ -5,7 +5,7 @@ const {registerSchema, loginSchema} = require("../../validator/auth-validator");
 const { isAuthenticated, authorizeRole } = require("../../middleware/auth");
 const authRouter = express.Router();
 
-authRouter.route('/register').post(validate(registerSchema), authController.register); 
+authRouter.route('/register').post(authController.register); 
 authRouter.route('/login').post(authController.login);
 authRouter.route('/logout').get(isAuthenticated, authController.logout);
 authRouter.route('/allusers').get(isAuthenticated, authorizeRole("admin"), authController.getAllUsers);

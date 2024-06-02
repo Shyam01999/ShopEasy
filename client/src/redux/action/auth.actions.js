@@ -1,13 +1,13 @@
 import axios from "axios";
 import { notifyError, notifySuccess } from "../../constant/toastAlerts";
 // import Cookies from 'js-cookie';
-import { FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA } from "../actionTypes/auth.actionTypes";
+import { FETCH_FORGOTPASSWORD_DATA, FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA } from "../actionTypes/auth.actionTypes";
 
 //Login Action 
 export const login = (reqbodydata, navigate) => async (dispatch) => {
     try {
         const res = await axios.post('http://localhost:8080/api/auth/login', reqbodydata);
-        console.log("login res",res)
+        console.log("login res", res)
         // Optionally, navigate to another page upon successful login
         if (res.data.message == 'Login Successful') {
             dispatch({ type: FETCH_LOGIN_DATA, payload: res.data });
@@ -43,5 +43,24 @@ export const signup = (reqbodydata, navigate) => async (dispatch) => {
     catch (error) {
         notifyError(`${error}`);
         console.log(`Error in Signup ${error}`);
+    }
+}
+
+//forgot password
+export const forgotpassword = (reqbodydata, navigate) => async (dispatch) => {
+    try {
+        const res = await axios.post('http://localhost:8080/api/auth/password/forgot', reqbodydata);
+        if (res.statusText == "OK") {
+            dispatch({ type: FETCH_FORGOTPASSWORD_DATA, payload: res.data });
+            notifySuccess(res.data.message);
+            alert(res.data.message);
+        } else {
+            notifyError(res.data.message);
+        }
+
+    }
+    catch (error) {
+        notifyError(`${error}`);
+        console.log(`Error in forgot password ${error}`);
     }
 }

@@ -48,10 +48,10 @@ function Signup() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        username: "Admin",
-        email: "admin@gmail.com",
-        password: "1234567",
-        mobilenumber: "9337757672",
+        username: "",
+        email: "",
+        password: "",
+        mobilenumber: "",
         role:"user"
       },
       validationSchema: signupSchema,
