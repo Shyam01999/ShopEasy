@@ -1,4 +1,22 @@
 /* module rule or reuseable component */
+/* header css start */
+.header-container{
+    background-color: #EEF7FF !important;
+}
+
+.link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn{
+    font-size: 1rem !important;
+    font-weight: 5....................................................................00 !important;
+}
+/* header css end */
 button {
     text-transform: capitalize;
     padding: 1rem 2.2rem;

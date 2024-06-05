@@ -117,7 +117,7 @@ function Forgotpassword() {
                         <Grid item>
                           <Typography variant="span">
                             Remember Password?
-                            <Link to="/login"> SignIn</Link>
+                            <Link to="/"> SignIn</Link>
                           </Typography>
                         </Grid>
                       </Grid>

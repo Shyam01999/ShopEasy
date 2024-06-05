@@ -192,7 +192,7 @@ function Signup() {
                         <Grid item>
                           <Typography variant="span">
                             Already have an account?
-                            <Link to="/login"> SignIn</Link>
+                            <Link to="/"> SignIn</Link>
                           </Typography>
                         </Grid>
                       </Grid>

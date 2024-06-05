@@ -64,8 +64,8 @@ function Login() {
 
   return (
     <div>
-      <MetaData title="ShopEasy Login" />
-      <Button onClick={handleOpen}>Login Modal</Button>
+      <MetaData title="ShopEasy " />
+      <Button onClick={handleOpen} className="btn">Login</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
