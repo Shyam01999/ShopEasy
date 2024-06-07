@@ -215,7 +215,7 @@ function Navbar({ children }) {
               
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }, }}>
               {/* <Tooltip title="Login"> */}
                 {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
                   {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}

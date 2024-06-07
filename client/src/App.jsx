@@ -25,12 +25,13 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/signup" element={<Signup />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
           <Route path="/resetpassword/:token" element={<Resetpassword />} />
           
           <Route path="/" element={<Home />}>
             <Route path="/cart" element={<Cart />} />
+            <Route path="/signup" element={<Signup />} />
+
             {/* <Route path="/login" element={<Login />} /> */}
           </Route>
           {/* <Route path="/" element={<Home><ProtectRoute /></Home>}> */}

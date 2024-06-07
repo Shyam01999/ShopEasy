@@ -24,24 +24,27 @@ import { Link } from "react-router-dom";
 import Copyright from "../../../constant/copyright";
 import { useFormik } from "formik";
 import { loginSchema } from "../../../schemas";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../redux/action/auth.actions";
 import { useNavigate } from "react-router-dom";
 import MetaData from "../../../constant/MetaData";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { openModal } from "../../../redux/action/loginModal.action";
 
 const defaultTheme = createTheme();
 
 function Login() {
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  
+  const open = useSelector((state) => state.loginModalReducer);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => dispatch(openModal(true));
+  const handleClose = () => dispatch(openModal(false));
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -65,7 +68,9 @@ function Login() {
   return (
     <div>
       <MetaData title="ShopEasy " />
-      <Button onClick={handleOpen} className="btn">Login</Button>
+      <Button onClick={handleOpen} className="btn">
+        Login
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -156,7 +161,7 @@ function Login() {
                           ),
                         }}
                       />
-                      
+
                       <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"

@@ -25,6 +25,7 @@ import MetaData from "../../../constant/MetaData";
 import { useDispatch } from "react-redux";
 import { signup } from "../../../redux/action/auth.actions";
 import axios from "axios";
+import { openModal } from "../../../redux/action/loginModal.action";
 
 const defaultTheme = createTheme();
 function Signup() {
@@ -52,13 +53,13 @@ function Signup() {
         email: "",
         password: "",
         mobilenumber: "",
-        role:"user"
+        role: "user",
       },
       validationSchema: signupSchema,
       onSubmit: (values, action) => {
         console.log("values", values);
         dispatch(signup(values, navigate));
-        
+
         // action.resetForm();
       },
     });
@@ -192,7 +193,9 @@ function Signup() {
                         <Grid item>
                           <Typography variant="span">
                             Already have an account?
-                            <Link to="/"> SignIn</Link>
+                            <Link to="/">
+                              SignIn
+                            </Link>
                           </Typography>
                         </Grid>
                       </Grid>
