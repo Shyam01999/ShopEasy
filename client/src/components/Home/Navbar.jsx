@@ -12,11 +12,13 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
 import brandLogo from "../.././images/shopeasy_logo.png";
 import Login from "../Authentication/Login/Login";
 import { FaShoppingCart } from "react-icons/fa";
 import MetaData from "../../constant/MetaData";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/action/auth.actions";
 
 const pages = [
   {
@@ -36,6 +38,11 @@ function Navbar({ children }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  const { userData, token } = useSelector((state) => state.authManager);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -51,9 +58,13 @@ function Navbar({ children }) {
     setAnchorElUser(null);
   };
 
+  const handleLogout = ()=>{
+    dispatch(logout(navigate))
+  }
+
   return (
     <>
-    <MetaData title="ShopEasy Home" />
+      <MetaData title="ShopEasy Home" />
       <AppBar position="sticky" className="header-container">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -111,14 +122,14 @@ function Navbar({ children }) {
                 textDecoration: "none",
               }}
             >
-              <Login/>
+              <Login />
             </Typography>
             <Box
               sx={{
                 flexGrow: 1,
                 display: { xs: "none", md: "flex" },
                 justifyContent: "end",
-                textTransform:"uppercase"
+                textTransform: "uppercase",
               }}
             >
               {/* {pages.map((page) => (
@@ -212,15 +223,22 @@ function Navbar({ children }) {
                   </NavLink>
                 );
               })}
-              
             </Box>
 
-            <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }, }}>
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: { xs: "none", md: "flex", },
+                marginLeft:2,
+                marginInline:2,
+                color: "#646cff" 
+              }}
+            >
               {/* <Tooltip title="Login"> */}
-                {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
-                  {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                  <Login/>
-                {/* </IconButton> */}
+              {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
+              {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+              {token ? <><span>{userData.username}</span> <span onClick={handleLogout} className="logoutBtn">LOGOUT</span></> : <Login />}
+              {/* </IconButton> */}
               {/* </Tooltip> */}
               {/* <Menu
                 sx={{ mt: "45px" }}

@@ -7,7 +7,7 @@ const authRouter = express.Router();
 
 authRouter.route('/register').post(authController.register); 
 authRouter.route('/login').post(authController.login);
-authRouter.route('/logout').get(isAuthenticated, authController.logout);
+authRouter.route('/logout').get(authController.logout);
 authRouter.route('/allusers').get(isAuthenticated, authorizeRole("admin"), authController.getAllUsers);
 authRouter.route('/update/user').post(isAuthenticated, authorizeRole("admin"), authController.updateUser);
 authRouter.route('/delete/user').post(isAuthenticated, authorizeRole("admin"), authController.deleteUser);

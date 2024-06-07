@@ -1,14 +1,13 @@
 import Cookies from 'js-cookie';
-import { FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA, FETCH_FORGOTPASSWORD_DATA } from '../actionTypes/auth.actionTypes';
-// const storedToken = localStorage.getItem('token');
-const storedToken = Cookies.get('loginData');
-// const storedUserData = localStorage.getItem('userData');
+import { FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA, FETCH_FORGOTPASSWORD_DATA, FETCH_LOGOUT_DATA } from '../actionTypes/auth.actionTypes';
+const storedToken = Cookies.get('token');
+const storedUserData = Cookies.get('userData');
 
 const authState = {
     // loading: false,
     // error: null,
-    token: storedToken ? storedToken : null,
-    // userData: storedUserData ? JSON.parse(storedUserData) : {},
+    token: storedToken ? JSON.parse(storedToken) : null,
+    userData: storedUserData ? JSON.parse(storedUserData) : {},
 };
 
 export const authReducer = (state = authState, { type, payload }) => {
@@ -23,6 +22,10 @@ export const authReducer = (state = authState, { type, payload }) => {
         }
 
         case FETCH_FORGOTPASSWORD_DATA: {
+            return { ...state, token: payload.token, userData: payload.userData };
+        }
+
+        case FETCH_LOGOUT_DATA: {
             return { ...state, token: payload.token, userData: payload.userData };
         }
 

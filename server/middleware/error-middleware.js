@@ -4,7 +4,7 @@ const errorMiddleware = (err, req, res, next) => {
     const extraDetails = err && err.extraDetails ? err.extraDetails : "Error From Backend";
     
     // console.error(err)
-    return res.status(status).json({message, extraDetails});
+    return res.status(status).json({message, extraDetails}); 
 }
 
 module.exports = errorMiddleware;

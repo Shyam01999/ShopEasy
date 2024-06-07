@@ -5,7 +5,7 @@ const User = db.User;
 
 const isAuthenticated = async (req, res, next) => {
     try {
-        const { token } = req.cookies;
+        const { token } = req.cookie;
         console.log("token",token);
         if (!token) {
             return res.json({ message: "Please Login to access this resource" })
@@ -21,7 +21,7 @@ const isAuthenticated = async (req, res, next) => {
         next();
     }
     catch (error) {
-        errorMiddleware(error);
+        errorMiddleware(error, req, res, next);
     }
 }
 
