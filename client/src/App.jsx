@@ -15,6 +15,8 @@ import Forgotpassword from "./components/Authentication/Forgotpassword/Forgotpas
 import Home from "./components/Home/Home";
 import ProtectRoute from "./components/ProtectRoute/ProtectRoute";
 import Cart from "./components/Cart/Cart";
+import Banner from "./components/Home/Banner";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   // useEffect(()=>{
@@ -27,12 +29,12 @@ function App() {
         <Routes>
           <Route path="/forgotpassword" element={<Forgotpassword />} />
           <Route path="/resetpassword/:token" element={<Resetpassword />} />
-          
-          <Route path="/" element={<Home />}>
+
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/signup" element={<Signup />} />
-
-            {/* <Route path="/login" element={<Login />} /> */}
+            <Route path="/login" element={<Login />} />
           </Route>
           {/* <Route path="/" element={<Home><ProtectRoute /></Home>}> */}
           {/* <Route path="kms" element={<KMS />} />

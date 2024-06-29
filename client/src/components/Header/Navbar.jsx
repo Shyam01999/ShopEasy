@@ -266,7 +266,7 @@ function Navbar({ children }) {
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="xl ">{children}</Container>
+      {/* <Container maxWidth="xl ">{children}</Container> */}
     </>
   );
 }

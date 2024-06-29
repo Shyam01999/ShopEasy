@@ -1,14 +1,16 @@
 import React from "react";
-import Navbar from "./Navbar";
 import MetaData from "../../constant/MetaData";
-import { Outlet } from "react-router-dom";
+import Banner from "./Banner";
+import Category from "./Category";
+import Products from "./Products";
 
 function Home({ children }) {
   return (
     <>
       <MetaData title="ShopEasy Home" />
-      <Navbar children={children} />
-      <Outlet/>
+      <Category />
+      <Banner />
+      <Products />
     </>
   );
 }
