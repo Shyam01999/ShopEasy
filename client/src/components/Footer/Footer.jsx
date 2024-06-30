@@ -1,9 +1,12 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
 
 function Footer() {
   return (
-    <div>Footer Page</div>
-  )
+    <Container maxWidth="xl" sx={{ background: "black", color: "white" }}>
+      Footer Page
+    </Container>
+  );
 }
 
-export default Footer
+export default Footer;

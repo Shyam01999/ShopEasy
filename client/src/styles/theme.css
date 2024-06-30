@@ -5,11 +5,13 @@
   --logo-color: #12d8fa;
   --main-color: linear-gradient(
     to right,
-    #1fa2ff 0%,
+     0%,
     #12d8fa 51%,
     #1fa2ff 100%
   );
   --btn-color: #646cff;
+  --white-color:#fff;
+  --hover-color:#1fa2ff;
   --menu-color: #2af598;
   --fb-logo: #0866ff;
 

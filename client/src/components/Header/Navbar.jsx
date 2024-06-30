@@ -19,6 +19,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import MetaData from "../../constant/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/action/auth.actions";
+import { Badge } from "@mui/material";
 
 const pages = [
   {
@@ -32,7 +33,7 @@ const pages = [
   //   // icon: <FaUserEdit />,
   // },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 
 function Navbar({ children }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -58,16 +59,16 @@ function Navbar({ children }) {
     setAnchorElUser(null);
   };
 
-  const handleLogout = ()=>{
-    dispatch(logout(navigate))
-  }
+  const handleLogout = () => {
+    dispatch(logout(navigate));
+  };
 
   return (
     <>
       <MetaData title="ShopEasy Home" />
       <AppBar position="sticky" className="header-container">
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar disableGutters sx={{ flexGrow: 1 }}>
             <Box>
               <Link to="/">
                 <img
@@ -79,68 +80,14 @@ function Navbar({ children }) {
               </Link>
             </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {/* {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))} */}
-              </Menu>
-            </Box>
-
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              <Login />
-            </Typography>
             <Box
               sx={{
                 flexGrow: 1,
-                display: { xs: "none", md: "flex" },
+                display: { xs: "flex", md: "flex" },
                 justifyContent: "end",
                 textTransform: "uppercase",
               }}
             >
-              {/* {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))} */}
               {pages.map((route, index) => {
                 if (route.subRoutes) {
                   return (
@@ -206,20 +153,21 @@ function Navbar({ children }) {
                 }
                 return (
                   <NavLink to={route.path} key={index} className="link">
-                    <div className="icon">{route.icon}</div>
-                    {/* <AnimatePresence> */}
-                    {/* {isOpen && ( */}
-                    <div
-                      // variants={showAnimation}
+                    <Badge badgeContent={1} color="error">
+                      <div className="icon" sx={{ fontSize: 5 }}>
+                        {route.icon}
+                      </div>
+                    </Badge>
+
+                    {/* <div
+                      variants={showAnimation}
                       initial="hidden"
                       animate="show"
                       exit="hidden"
                       className="link_text"
                     >
                       {route.name}
-                    </div>
-                    {/* )} */}
-                    {/* </AnimatePresence> */}
+                    </div> */}
                   </NavLink>
                 );
               })}
@@ -228,45 +176,73 @@ function Navbar({ children }) {
             <Box
               sx={{
                 flexGrow: 0,
-                display: { xs: "none", md: "flex", },
-                marginLeft:2,
-                marginInline:2,
-                color: "#646cff" 
+                display: { xs: "flex", md: "flex" },
+                marginLeft: 1,
+                marginInline: 2,
+                color: "#646cff",
               }}
             >
-              {/* <Tooltip title="Login"> */}
-              {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
-              {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-              {token ? <><span>{userData.username}</span> <span onClick={handleLogout} className="logoutBtn">LOGOUT</span></> : <Login />}
-              {/* </IconButton> */}
-              {/* </Tooltip> */}
-              {/* <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu> */}
+              {token ? (
+                <>
+                  <Box sx={{ flexGrow: 1, margin: "auto" }}>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar alt="" src="/static/images/avatar/2.jpg" />
+                      </IconButton>
+                    </Tooltip>
+                    <Menu
+                      sx={{ mt: "4rem" }}
+                      id="menu-appbar"
+                      anchorEl={anchorElUser}
+                      anchorOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      keepMounted
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "right",
+                      }}
+                      open={Boolean(anchorElUser)}
+                      onClose={handleCloseUserMenu}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          p: 1,
+                        }}
+                      >
+                        <IconButton sx={{ p: 0 }}>
+                          <Avatar alt="" src="/static/images/avatar/2.jpg" sx={{ width:60, height: 60 }}/>
+                        </IconButton>
+                        <span>{userData.username}</span>{" "}
+                        {settings.map((setting) => (
+                          <MenuItem
+                            key={setting}
+                            onClick={
+                              setting === "Logout"
+                                ? handleLogout
+                                : handleCloseUserMenu
+                            }
+                          >
+                            <Typography textAlign="center">
+                              {setting}
+                            </Typography>
+                          </MenuItem>
+                        ))}
+                      </Box>
+                    </Menu>
+                  </Box>
+                </>
+              ) : (
+                <Login />
+              )}
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
-      {/* <Container maxWidth="xl ">{children}</Container> */}
     </>
   );
 }

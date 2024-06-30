@@ -68,7 +68,7 @@ function Login() {
   return (
     <div>
       <MetaData title="ShopEasy " />
-      <Button onClick={handleOpen} className="btn">
+      <Button onClick={handleOpen} className="commonBtn">
         Login
       </Button>
       <Modal
