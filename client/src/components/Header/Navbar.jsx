@@ -13,13 +13,14 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, NavLink, useNavigate, useParams } from "react-router-dom";
-import brandLogo from "../.././images/shopeasy_logo.png";
+import brandLogo from "../.././images/shopeasy_logo.webp";
 import Login from "../Authentication/Login/Login";
 import { FaShoppingCart } from "react-icons/fa";
 import MetaData from "../../constant/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/action/auth.actions";
-import { Badge } from "@mui/material";
+import { Badge, InputBase, alpha, styled } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 
 const pages = [
   {
@@ -35,9 +36,50 @@ const pages = [
 ];
 const settings = ["Profile", "Logout"];
 
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  left:"-5rem",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: "var(--white-color)",
+  borderRadius:"2rem",
+  color: "var(--text-color)",
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
+
 function Navbar({ children }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [searchvalue, setSearchValue] = React.useState("");
 
   const { userData, token } = useSelector((state) => state.authManager);
 
@@ -80,6 +122,19 @@ function Navbar({ children }) {
               </Link>
             </Box>
 
+            <Box>
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            </Box>
+
             <Box
               sx={{
                 flexGrow: 1,
@@ -88,78 +143,79 @@ function Navbar({ children }) {
                 textTransform: "uppercase",
               }}
             >
-              {pages.map((route, index) => {
-                if (route.subRoutes) {
-                  return (
-                    <>
-                      <div className="menu">
-                        {/* <div className={`menu_item ${isMenuOpen ?"activemenu":"" }`}> */}
-                        <div className="icon">{route.icon}</div>
+              {token &&
+                pages.map((route, index) => {
+                  if (route.subRoutes) {
+                    return (
+                      <>
+                        <div className="menu">
+                          {/* <div className={`menu_item ${isMenuOpen ?"activemenu":"" }`}> */}
+                          <div className="icon">{route.icon}</div>
+                          {/* <AnimatePresence> */}
+                          {
+                            <div
+                              // variants={showAnimation}
+                              initial="hidden"
+                              animate="show"
+                              exit="hidden"
+                              className="link_text"
+                            >
+                              {route.name}
+                            </div>
+                          }
+                          {/* </AnimatePresence> */}
+                          {/* </div> */}
+                          {/* {isOpen && ( */}
+                          <div
+                          // animate={
+                          // isMenuOpen
+                          //   ? {
+                          //       rotate: -90,
+                          //     }
+                          //   : { rotate: 0 }
+                          // }
+                          // className={`icon ${isMenuOpen ?"activemenu":""}`}
+                          >
+                            {/* <FaAngleDown /> */}
+                          </div>
+                          {/* )} */}
+                        </div>{" "}
                         {/* <AnimatePresence> */}
-                        {
-                          <div
-                            // variants={showAnimation}
-                            initial="hidden"
-                            animate="show"
-                            exit="hidden"
-                            className="link_text"
-                          >
-                            {route.name}
-                          </div>
-                        }
-                        {/* </AnimatePresence> */}
-                        {/* </div> */}
-                        {/* {isOpen && ( */}
+                        {/* {isMenuOpen && ( */}
                         <div
-                        // animate={
-                        // isMenuOpen
-                        //   ? {
-                        //       rotate: -90,
-                        //     }
-                        //   : { rotate: 0 }
-                        // }
-                        // className={`icon ${isMenuOpen ?"activemenu":""}`}
+                          // variants={menuAnimation}
+                          initial="hidden"
+                          animate="show"
+                          exit="hidden"
+                          className="menu_container"
                         >
-                          {/* <FaAngleDown /> */}
+                          {route.subRoutes.map((subRoute, index) => (
+                            <div
+                              // variants={menuItemAnimation}
+                              key={index}
+                              // custom={index}
+                            >
+                              <NavLink to={subRoute.path} className="link">
+                                <div className="icon">{subRoute.icon}</div>
+                                <div className="link_text">{subRoute.name}</div>
+                              </NavLink>
+                            </div>
+                          ))}
                         </div>
-                        {/* )} */}
-                      </div>{" "}
-                      {/* <AnimatePresence> */}
-                      {/* {isMenuOpen && ( */}
-                      <div
-                        // variants={menuAnimation}
-                        initial="hidden"
-                        animate="show"
-                        exit="hidden"
-                        className="menu_container"
-                      >
-                        {route.subRoutes.map((subRoute, index) => (
-                          <div
-                            // variants={menuItemAnimation}
-                            key={index}
-                            // custom={index}
-                          >
-                            <NavLink to={subRoute.path} className="link">
-                              <div className="icon">{subRoute.icon}</div>
-                              <div className="link_text">{subRoute.name}</div>
-                            </NavLink>
-                          </div>
-                        ))}
-                      </div>
-                      {/* )}{" "} */}
-                      {/* </AnimatePresence> */}
-                    </>
-                  );
-                }
-                return (
-                  <NavLink to={route.path} key={index} className="link">
-                    <Badge badgeContent={1} color="error">
-                      <div className="icon" sx={{ fontSize: 5 }}>
-                        {route.icon}
-                      </div>
-                    </Badge>
+                        {/* )}{" "} */}
+                        {/* </AnimatePresence> */}
+                      </>
+                    );
+                  }
+                  return (
+                    <NavLink to={route.path} key={index} className="link">
+                      <Badge badgeContent={1} color="error">
+                        <div className="icon" sx={{ fontSize: 5 }}>
+                          {route.icon}
+                        </div>
+                      </Badge>
 
-                    {/* <div
+                      {/* <div
                       variants={showAnimation}
                       initial="hidden"
                       animate="show"
@@ -168,9 +224,9 @@ function Navbar({ children }) {
                     >
                       {route.name}
                     </div> */}
-                  </NavLink>
-                );
-              })}
+                    </NavLink>
+                  );
+                })}
             </Box>
 
             <Box
@@ -215,7 +271,11 @@ function Navbar({ children }) {
                         }}
                       >
                         <IconButton sx={{ p: 0 }}>
-                          <Avatar alt="" src="/static/images/avatar/2.jpg" sx={{ width:60, height: 60 }}/>
+                          <Avatar
+                            alt=""
+                            src="/static/images/avatar/2.jpg"
+                            sx={{ width: 60, height: 60 }}
+                          />
                         </IconButton>
                         <span>{userData.username}</span>{" "}
                         {settings.map((setting) => (
