@@ -2,28 +2,3 @@
 button:hover {
   background-color: var(--hover-color) !important;
 }
-
-/* a:hover,
-a.active {
-  color: var(--btn-color);
-}
-
-.navbar li {
-  position: relative;
-}
-
-.navbar li ::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  top: 3rem;
-  width: 0;
-  height: 2px;
-  background-color: var(--menu-color);
-  transition: width 0.4s linear;
-}
-
-.navbar li a:hover::after {
-  width: 100%;
-} */

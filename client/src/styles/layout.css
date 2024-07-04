@@ -23,12 +23,7 @@
   background: var(--bg-color);
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 15rem;
-}
+
 
 .logo-brand h2 {
   font-size: 3rem;

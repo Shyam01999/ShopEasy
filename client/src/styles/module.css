@@ -4,6 +4,12 @@
   background-color: #eef7ff !important;
 }
 
+.container {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
 .link {
   display: flex;
   justify-content: center;
@@ -53,3 +59,5 @@ button {
   font-size: 1.5rem;
   /* color: var(--text-color); */
 }
+
+/* footer css start */
