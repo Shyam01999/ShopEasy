@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { FETCH_LOGIN_DATA, FETCH_SIGNUP_DATA, FETCH_FORGOTPASSWORD_DATA, FETCH_LOGOUT_DATA } from '../actionTypes/auth.actionTypes';
-const storedToken = Cookies.get('token');
+const storedToken = Cookies.get('frontendToken');
 const storedUserData = Cookies.get('userData');
 
 const authState = {

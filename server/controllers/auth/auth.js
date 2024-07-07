@@ -93,7 +93,10 @@ const logout = async (req, res, next) => {
   try {
     const options = {
       expires: new Date(Date.now()),
-      httpOnly: true
+      httpOnly: process.env.HTTP_ONLY,
+      secure: process.env.COOKIE_SECURE,
+      sameSite: 'lax', // Adjust if needed
+      path: '/cart', // Adjust if needed
     };
     res.status(200).cookie("token", null, options).json({ message: "Loggedout Successfully" })
   }
@@ -157,7 +160,7 @@ const forgotPassword = async (req, res, next) => {
 const resetPassword = async (req, res, next) => {
   //creating token hash 
   const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
-  
+
   // Find user by reset token and check expiration
   const user = await User.findOne({
     where: {

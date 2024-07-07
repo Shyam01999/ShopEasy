@@ -7,13 +7,16 @@ import { OPEN_LOGIN_MODAL } from "../actionTypes/loginTogle.action";
 //Login Action 
 export const login = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/auth/login', reqbodydata);
+        const res = await axios.post('http://localhost:8080/api/auth/login', reqbodydata,
+            {
+                withCredentials: true
+            });
         console.log("login res", res)
         // Optionally, navigate to another page upon successful login
         if (res.data.message == 'Login Successful') {
             dispatch({ type: FETCH_LOGIN_DATA, payload: res.data });
             const loginData = res.data;
-            Cookies.set('token', JSON.stringify(loginData.token), { expires: 7, path: '/' });
+            Cookies.set('frontendToken', JSON.stringify(loginData.token), { expires: 7, path: '/' });
             Cookies.set('userData', JSON.stringify(loginData.userData), { expires: 7, path: '/' });
             dispatch({ type: OPEN_LOGIN_MODAL, payload: false });
             notifySuccess(res.data.message);
@@ -71,7 +74,10 @@ export const forgotpassword = (reqbodydata, navigate) => async (dispatch) => {
 //Login Action 
 export const logout = (navigate) => async (dispatch) => {
     try {
-        const res = await axios.get('http://localhost:8080/api/auth/logout');
+        const res = await axios.get('http://localhost:8080/api/auth/logout',
+            {
+                withCredentials: true // Important
+            });
         console.log("logout res", res)
         // Optionally, navigate to another page upon successful login
         if (res.data.message == 'Loggedout Successfully') {
@@ -81,7 +87,7 @@ export const logout = (navigate) => async (dispatch) => {
                     userData: {}
                 }
             });
-            Cookies.remove('token');
+            Cookies.remove('frontendToken');
             Cookies.remove('userData');
             notifySuccess(res.data.message);
             navigate("/");
