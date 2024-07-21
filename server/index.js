@@ -12,6 +12,7 @@ const contactRouter = require("./router/contact-router/contact-router");
 const productRouter = require("./router/product-router/product-router");
 const orderRouter = require("./router/order-router/order-router");
 const errorMiddleware = require("./middleware/error-middleware");
+const paymentRouter = require("./router/payment-router/payment-router");
 
 app.use(express.json()); //middleware
 app.use(cookieParser());
@@ -29,6 +30,7 @@ app.use(cors({
 app.use("/api/auth", authRouter);
 app.use("/api/product", productRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/payment", paymentRouter);
 
 app.use(errorMiddleware)
 
