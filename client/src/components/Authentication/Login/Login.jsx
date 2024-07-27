@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Backdrop,
   Box,
@@ -34,10 +34,10 @@ import { openModal } from "../../../redux/action/loginModal.action";
 
 const defaultTheme = createTheme();
 
-function Login() {
+function Login({ setProgress }) {
   // const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  
+
   const open = useSelector((state) => state.loginModalReducer);
 
   const dispatch = useDispatch();
@@ -52,6 +52,13 @@ function Login() {
     event.preventDefault();
   };
 
+  useEffect(() => {
+    setProgress(20);
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000);
+  }, [setProgress]);
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -62,13 +69,17 @@ function Login() {
       onSubmit: (values, action) => {
         dispatch(login(values, navigate));
         action.resetForm();
+        setProgress(20);
+        setTimeout(() => {
+          setProgress(100);
+        }, 1000);
       },
     });
 
   return (
     <div>
-      <MetaData title="ShopEasy " />
-      <Button onClick={handleOpen} className="commonBtn">
+      <MetaData title="ShopEasy Login" />
+      {/* <Button onClick={handleOpen} className="commonBtn">
         Login
       </Button>
       <Modal
@@ -82,118 +93,115 @@ function Login() {
           timeout: 500,
         }}
       >
-        <Fade in={open} className="modal-container">
-          <Box>
-            <Container>
-              <ThemeProvider theme={defaultTheme}>
-                <Container
-                  component="main"
-                  maxWidth="xs"
-                  id="transition-modal-description"
+        <Fade in={open} className="modal-container"></Fade>
+      </Modal> */}
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <Container>
+          <ThemeProvider theme={defaultTheme}>
+            <Container
+              component="main"
+              maxWidth="xs"
+              id="transition-modal-description"
+            >
+              <CssBaseline />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin:"3rem 0rem"
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h4">
+                  Welcome
+                </Typography>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit}
+                  sx={{ fontSize: "1rem", mt: 1 }}
                 >
-                  <CssBaseline />
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
+                  <TextField
+                    type="email"
+                    margin="normal"
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    required
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={Boolean(touched.email) && Boolean(errors.email)}
+                    helperText={Boolean(touched.email) && errors.email}
+                  />
+                  <TextField
+                    type={showPassword ? "text" : "password"}
+                    margin="normal"
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    id="password"
+                    required
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={
+                      Boolean(touched.password) && Boolean(errors.password)
+                    }
+                    helperText={Boolean(touched.password) && errors.password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
                     }}
-                  >
-                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                      <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h4">
-                      Welcome
-                    </Typography>
-                    <Box
-                      component="form"
-                      onSubmit={handleSubmit}
-                      sx={{ fontSize: "1rem", mt: 1 }}
-                    >
-                      <TextField
-                        type="email"
-                        margin="normal"
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        required
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={Boolean(touched.email) && Boolean(errors.email)}
-                        helperText={Boolean(touched.email) && errors.email}
-                      />
-                      <TextField
-                        type={showPassword ? "text" : "password"}
-                        margin="normal"
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        id="password"
-                        required
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={
-                          Boolean(touched.password) && Boolean(errors.password)
-                        }
-                        helperText={
-                          Boolean(touched.password) && errors.password
-                        }
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                aria-label="toggle password visibility"
-                                onClick={handleClickShowPassword}
-                                onMouseDown={handleMouseDownPassword}
-                              >
-                                {showPassword ? (
-                                  <VisibilityOff />
-                                ) : (
-                                  <Visibility />
-                                )}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
+                  />
 
-                      <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                      />
-                      <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                      >
-                        Sign In
-                      </Button>
-                      <Grid container>
-                        <Grid item xs>
-                          <Typography variant="span">
-                            <Link to="/forgotpassword">Forgot password?</Link>
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="span">
-                            Don't have an account?
-                            <Link to="/signup"> SignUp</Link>
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Box>
-                  <Copyright sx={{ mt: 4, mb: 2 }} />
-                </Container>
-              </ThemeProvider>
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Typography variant="span">
+                        <Link to="/forgotpassword">Forgot password?</Link>
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="span">
+                        Don't have an account?
+                        <Link to="/signup"> SignUp</Link>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+              <Copyright sx={{ mt: 4, mb: 2 }} />
             </Container>
-          </Box>
-        </Fade>
-      </Modal>
+          </ThemeProvider>
+        </Container>
+      </Box>
     </div>
   );
 }

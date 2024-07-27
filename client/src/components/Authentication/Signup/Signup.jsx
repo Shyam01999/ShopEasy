@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Backdrop,
   Box,
@@ -28,9 +28,16 @@ import axios from "axios";
 import { openModal } from "../../../redux/action/loginModal.action";
 
 const defaultTheme = createTheme();
-function Signup() {
+function Signup({ setProgress }) {
   const [open, setOpen] = useState(true);
   // const handleOpen = () => setOpen(true);
+
+  useEffect(() => {
+    setProgress(20);
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000);
+  }, [setProgress]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,6 +66,10 @@ function Signup() {
       onSubmit: (values, action) => {
         console.log("values", values);
         dispatch(signup(values, navigate));
+        setProgress(20);
+        setTimeout(() => {
+          setProgress(100);
+        }, 1000);
 
         // action.resetForm();
       },
@@ -193,9 +204,7 @@ function Signup() {
                         <Grid item>
                           <Typography variant="span">
                             Already have an account?
-                            <Link to="/">
-                              SignIn
-                            </Link>
+                            <Link to="/">SignIn</Link>
                           </Typography>
                         </Grid>
                       </Grid>

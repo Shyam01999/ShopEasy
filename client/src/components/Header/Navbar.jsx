@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/action/auth.actions";
 import { Badge, InputBase, alpha, styled } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { MdLogin } from "react-icons/md";
 
 const pages = [
   {
@@ -38,10 +39,10 @@ const settings = ["Profile", "Logout"];
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  left:"-5rem",
+  left: "-5rem",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: "var(--white-color)",
-  borderRadius:"2rem",
+  borderRadius: "2rem",
   color: "var(--text-color)",
   marginRight: theme.spacing(2),
   marginLeft: 0,
@@ -108,22 +109,22 @@ function Navbar({ children }) {
   return (
     <>
       <MetaData title="ShopEasy Home" />
-      <AppBar position="sticky" className="header-container">
+      <AppBar position="sticky" sx={{ background: "var(--header-color)" }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ flexGrow: 1 }}>
-            <Box>
+          <Toolbar disableGutters>
+            <Box sx={{ width: "100%" }}>
               <Link to="/">
                 <img
                   src={brandLogo}
                   alt="Brand logo"
-                  width="20%"
+                  width="25%"
                   height="auto"
                 />
               </Link>
             </Box>
 
-            <Box>
-              <Search>
+            <Box sx={{ width: "100%" }}>
+              <Search className="search-container" sx={{ left: "0rem" }}>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -134,88 +135,101 @@ function Navbar({ children }) {
                 />
               </Search>
             </Box>
-
             <Box
               sx={{
-                flexGrow: 1,
                 display: { xs: "flex", md: "flex" },
-                justifyContent: "end",
-                textTransform: "uppercase",
+                justifyContent: "flex-end",
+                alignItems:"center",
+                gap:"1rem",
+                marginLeft: 1,
+                marginInline: 2,
+                color: "#646cff",
+                width: "100%",
               }}
             >
-              {token &&
-                pages.map((route, index) => {
-                  if (route.subRoutes) {
-                    return (
-                      <>
-                        <div className="menu">
-                          {/* <div className={`menu_item ${isMenuOpen ?"activemenu":"" }`}> */}
-                          <div className="icon">{route.icon}</div>
-                          {/* <AnimatePresence> */}
-                          {
-                            <div
-                              // variants={showAnimation}
-                              initial="hidden"
-                              animate="show"
-                              exit="hidden"
-                              className="link_text"
-                            >
-                              {route.name}
-                            </div>
-                          }
-                          {/* </AnimatePresence> */}
-                          {/* </div> */}
-                          {/* {isOpen && ( */}
-                          <div
-                          // animate={
-                          // isMenuOpen
-                          //   ? {
-                          //       rotate: -90,
-                          //     }
-                          //   : { rotate: 0 }
-                          // }
-                          // className={`icon ${isMenuOpen ?"activemenu":""}`}
-                          >
-                            {/* <FaAngleDown /> */}
-                          </div>
-                          {/* )} */}
-                        </div>{" "}
-                        {/* <AnimatePresence> */}
-                        {/* {isMenuOpen && ( */}
-                        <div
-                          // variants={menuAnimation}
-                          initial="hidden"
-                          animate="show"
-                          exit="hidden"
-                          className="menu_container"
-                        >
-                          {route.subRoutes.map((subRoute, index) => (
-                            <div
-                              // variants={menuItemAnimation}
-                              key={index}
-                              // custom={index}
-                            >
-                              <NavLink to={subRoute.path} className="link">
-                                <div className="icon">{subRoute.icon}</div>
-                                <div className="link_text">{subRoute.name}</div>
-                              </NavLink>
-                            </div>
-                          ))}
-                        </div>
-                        {/* )}{" "} */}
-                        {/* </AnimatePresence> */}
-                      </>
-                    );
-                  }
-                  return (
-                    <NavLink to={route.path} key={index} className="link">
-                      <Badge badgeContent={1} color="error">
-                        <div className="icon" sx={{ fontSize: 5 }}>
-                          {route.icon}
-                        </div>
-                      </Badge>
+              {token ? (
+                <>
+                  <Box>
+                    {token &&
+                      pages.map((route, index) => {
+                        if (route.subRoutes) {
+                          return (
+                            <>
+                              <div className="menu">
+                                {/* <div className={`menu_item ${isMenuOpen ?"activemenu":"" }`}> */}
+                                <div className="icon">{route.icon}</div>
+                                {/* <AnimatePresence> */}
+                                {
+                                  <div
+                                    // variants={showAnimation}
+                                    initial="hidden"
+                                    animate="show"
+                                    exit="hidden"
+                                    className="link_text"
+                                  >
+                                    {route.name}
+                                  </div>
+                                }
+                                {/* </AnimatePresence> */}
+                                {/* </div> */}
+                                {/* {isOpen && ( */}
+                                <div
+                                // animate={
+                                // isMenuOpen
+                                //   ? {
+                                //       rotate: -90,
+                                //     }
+                                //   : { rotate: 0 }
+                                // }
+                                // className={`icon ${isMenuOpen ?"activemenu":""}`}
+                                >
+                                  {/* <FaAngleDown /> */}
+                                </div>
+                                {/* )} */}
+                              </div>{" "}
+                              {/* <AnimatePresence> */}
+                              {/* {isMenuOpen && ( */}
+                              <div
+                                // variants={menuAnimation}
+                                initial="hidden"
+                                animate="show"
+                                exit="hidden"
+                                className="menu_container"
+                              >
+                                {route.subRoutes.map((subRoute, index) => (
+                                  <div
+                                    // variants={menuItemAnimation}
+                                    key={index}
+                                    // custom={index}
+                                  >
+                                    <NavLink
+                                      to={subRoute.path}
+                                      className="link"
+                                    >
+                                      <div className="icon">
+                                        {subRoute.icon}
+                                      </div>
+                                      <div className="link_text">
+                                        {subRoute.name}
+                                      </div>
+                                    </NavLink>
+                                  </div>
+                                ))}
+                              </div>
+                              {/* )}{" "} */}
+                              {/* </AnimatePresence> */}
+                            </>
+                          );
+                        }
+                        return (
+                          <NavLink to={route.path} key={index} className="link">
+                            <Badge badgeContent={1} color="error">
+                              <div className="icon" sx={{ fontSize: 5 }}>
+                                {route.icon}
+                              </div>
+                            </Badge>
 
-                      {/* <div
+                            {/* <div
                       variants={showAnimation}
                       initial="hidden"
                       animate="show"
@@ -224,23 +238,11 @@ function Navbar({ children }) {
                     >
                       {route.name}
                     </div> */}
-                    </NavLink>
-                  );
-                })}
-            </Box>
-
-            <Box
-              sx={{
-                flexGrow: 0,
-                display: { xs: "flex", md: "flex" },
-                marginLeft: 1,
-                marginInline: 2,
-                color: "#646cff",
-              }}
-            >
-              {token ? (
-                <>
-                  <Box sx={{ flexGrow: 1, margin: "auto" }}>
+                          </NavLink>
+                        );
+                      })}
+                  </Box>
+                  <Box>
                     <Tooltip title="Open settings">
                       <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                         <Avatar alt="" src="/static/images/avatar/2.jpg" />
@@ -297,7 +299,19 @@ function Navbar({ children }) {
                   </Box>
                 </>
               ) : (
-                <Login />
+                <Box sx={{}}>
+                  <Tooltip title="Login">
+                    <Button
+                      variant="contained"
+                      size="small"
+                      endIcon={<MdLogin />}
+                    >
+                      <Link to="/login" className="headerBtn">
+                        Login
+                      </Link>
+                    </Button>
+                  </Tooltip>
+                </Box>
               )}
             </Box>
           </Toolbar>

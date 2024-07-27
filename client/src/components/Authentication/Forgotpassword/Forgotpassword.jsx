@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Backdrop,
   Box,
@@ -26,11 +26,18 @@ import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
-function Forgotpassword() {
+function Forgotpassword({ setProgress }) {
   const [open, setOpen] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setProgress(20);
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000);
+  }, [setProgress]);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -43,6 +50,10 @@ function Forgotpassword() {
       onSubmit: (values, action) => {
         dispatch(forgotpassword(values, navigate));
         action.resetForm();
+        setProgress(20);
+        setTimeout(() => {
+          setProgress(100);
+        }, 1000);
       },
     });
 

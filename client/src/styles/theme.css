@@ -1,7 +1,8 @@
 /* Theme Rule */
 :root {
+  --header-color: #eef7ff;
   --bg-color: #1f242d;
-  --body-color:#f1f3f6;
+  --body-color: #f1f3f6;
   --text-color: #000000;
   --logo-color: #12d8fa;
   --main-color: linear-gradient(to right, 0%, #12d8fa 51%, #1fa2ff 100%);

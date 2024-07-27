@@ -2,10 +2,22 @@ const axios = require('axios');
 const sha256 = require("sha256");
 const crypto = require('crypto');
 
-const HOST_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox";
-const MERCHANT_ID = "PGTESTPAYUAT"
-const SALT_INDEX = 1;
-const SALT_KEY = "099eb0cd-02cf-4e2a-8aca-3e6c6aff0399";
+const HOST_URL = process.env.PHONEPE_HOST_URL;
+const MERCHANT_ID = process.env.PHONEPE_MERCHANT_ID;
+const SALT_INDEX = process.env.PHONEPE_SALT_INDEX;
+const SALT_KEY = process.env.PHONEPE_SALT_KEY;
+
+//Production Phone pe URL
+// let phonePayHostUrl = "https://api.phonepe.com/apis/hermes"
+// let merchantId = "M222PG348OBUS"
+// let saltIndex = 1
+// let saltKey = "0fd779b2-323b-4edc-af6e-ebcb1469026d"
+
+// UAT Url
+// let phonePayHostUrl = "https://api-preprod.phonepe.com/apis/pg-sandbox"
+// let merchantId = "PGTESTPAYUAT85"
+// let saltIndex = 1
+// let saltKey = "88186875-58c6-4313-a000-1e640b3db251"
 
 const paymentController = async (req, res) => {
     try {
@@ -49,9 +61,15 @@ const paymentController = async (req, res) => {
         };
 
         axios.request(options)
-            .then((res) => {
-                console.log(res.data);
-                res.status(200).send(response.data);
+            .then((response) => {
+                console.log(response.data);
+                if (response.data.success) {
+                    const url = response.data.data?.instrumentResponse?.redirectInfo?.url;
+                    res.json({ message: "Payment gateway page", redirectUrl: url });
+                }
+                else {
+                    res.status(500).json({ error: 'Invalid response from payment gateway' });
+                }
             })
             .catch((error) => {
                 console.log(error);

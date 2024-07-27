@@ -6,7 +6,7 @@ import "./styles/theme.css";
 import "./styles/states.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import NotFound from "./components/NotFound/NotFound";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { notifySuccess } from "./constant/toastAlerts";
 import Login from "./components/Authentication/Login/Login";
 import Signup from "./components/Authentication/Signup/Signup";
@@ -17,8 +17,10 @@ import ProtectRoute from "./components/ProtectRoute/ProtectRoute";
 import Cart from "./components/Cart/Cart";
 import Banner from "./components/Home/Banner";
 import Layout from "./components/Layout/Layout";
+import LoadingBar from "react-top-loading-bar";
 
 function App() {
+  const [progress, setProgress] = useState(0);
   // useEffect(()=>{
   //   notifySuccess("Welcome to Shop Ease App")
   // },[])
@@ -26,15 +28,20 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <LoadingBar
+          color="#646cff"
+          progress={progress}
+          onLoaderFinished={() => setProgress(0)}
+        />
         <Routes>
-          <Route path="/forgotpassword" element={<Forgotpassword />} />
-          <Route path="/resetpassword/:token" element={<Resetpassword />} />
+          <Route path="/forgotpassword" element={<Forgotpassword setProgress={setProgress}/>} />
+          <Route path="/resetpassword/:token" element={<Resetpassword setProgress={setProgress}/>} />
 
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+            <Route index element={<Home setProgress={setProgress}/>} />
+            <Route path="/cart" element={<Cart setProgress={setProgress}/>} />
+            <Route path="/signup" element={<Signup setProgress={setProgress}/>} />
+            <Route path="/login" element={<Login setProgress={setProgress}/>} />
           </Route>
           {/* <Route path="/" element={<Home><ProtectRoute /></Home>}> */}
           {/* <Route path="kms" element={<KMS />} />

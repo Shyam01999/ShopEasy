@@ -1,9 +1,5 @@
 /* module rule or reuseable component */
 /* header css start */
-.header-container {
-  background-color: #eef7ff !important;
-}
-
 .container {
   max-width: 90rem;
   margin: 0 auto;
@@ -27,6 +23,10 @@
     background-color: var(--btn-color);
     color: var(--white-color);
     border-radius: 1.3rem;
+}
+
+.headerBtn{
+  color: var(--white-color);
 }
 /* header css end */
 button {

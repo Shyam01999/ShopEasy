@@ -8,7 +8,7 @@ function Layout() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="xl" component="main" sx={{minHeight:"calc(100vh - 153px)"}}>
+      <Container maxWidth="xl" component="main" sx={{minHeight:"calc(100vh - 9.125rem)"}}>
         <Outlet />
       </Container>
       <Footer />

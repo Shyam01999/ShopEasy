@@ -29,12 +29,17 @@ import { notifyError, notifySuccess } from "../../../constant/toastAlerts";
 
 const defaultTheme = createTheme();
 
-function Resetpassword() {
+function Resetpassword({ setProgress }) {
   const [open, setOpen] = useState(true);
 
   const { token } = useParams();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    setProgress(20);
+    setTimeout(() => {
+      setProgress(100);
+    }, 1000);
+  }, [setProgress]);
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -56,9 +61,17 @@ function Resetpassword() {
           );
           if (res.data.message === "Password reset successful") {
             notifySuccess(res.data.message);
+            setProgress(20);
+            setTimeout(() => {
+              setProgress(100);
+            }, 1000);
             navigate("/");
           } else {
             notifyError(res.data.message);
+            setProgress(20);
+            setTimeout(() => {
+              setProgress(100);
+            }, 1000);
           }
           // alert("Password has been updated successfully");
         } catch (error) {
