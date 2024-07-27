@@ -38,13 +38,13 @@ function Login({ setProgress }) {
   // const [open, setOpen] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const open = useSelector((state) => state.loginModalReducer);
+  // const open = useSelector((state) => state.loginModalReducer);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleOpen = () => dispatch(openModal(true));
-  const handleClose = () => dispatch(openModal(false));
+  // const handleOpen = () => dispatch(openModal(true));
+  // const handleClose = () => dispatch(openModal(false));
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -63,7 +63,7 @@ function Login({ setProgress }) {
     useFormik({
       initialValues: {
         email: "shyamsundarsahoo98@gmail.com",
-        password: "1234567",
+        password: "12345678",
       },
       validationSchema: loginSchema,
       onSubmit: (values, action) => {
@@ -77,7 +77,7 @@ function Login({ setProgress }) {
     });
 
   return (
-    <div>
+    <div className="auth-container">
       <MetaData title="ShopEasy Login" />
       {/* <Button onClick={handleOpen} className="commonBtn">
         Login
@@ -112,7 +112,6 @@ function Login({ setProgress }) {
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "center",
-                  margin:"3rem 0rem"
                 }}
               >
                 <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -197,7 +196,7 @@ function Login({ setProgress }) {
                   </Grid>
                 </Box>
               </Box>
-              <Copyright sx={{ mt: 4, mb: 2 }} />
+              <Copyright sx={{ mt: 2, mb: 2 }} />
             </Container>
           </ThemeProvider>
         </Container>

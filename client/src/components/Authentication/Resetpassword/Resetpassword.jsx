@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Backdrop,
   Box,
@@ -30,7 +30,7 @@ import { notifyError, notifySuccess } from "../../../constant/toastAlerts";
 const defaultTheme = createTheme();
 
 function Resetpassword({ setProgress }) {
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
 
   const { token } = useParams();
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Resetpassword({ setProgress }) {
     }, 1000);
   }, [setProgress]);
   // const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -82,10 +82,10 @@ function Resetpassword({ setProgress }) {
     });
 
   return (
-    <div>
+    <div className="auth-container">
       <MetaData title="ShopEasy Resetpassword" />
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -97,7 +97,10 @@ function Resetpassword({ setProgress }) {
         }}
       >
         <Fade in={open} className="modal-container">
-          <Box>
+          
+        </Fade>
+      </Modal> */}
+      <Box>
             <Container>
               <ThemeProvider theme={defaultTheme}>
                 <Container
@@ -188,8 +191,6 @@ function Resetpassword({ setProgress }) {
               </ThemeProvider>
             </Container>
           </Box>
-        </Fade>
-      </Modal>
     </div>
   );
 }

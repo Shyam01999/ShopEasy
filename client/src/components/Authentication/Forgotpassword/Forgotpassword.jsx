@@ -58,10 +58,10 @@ function Forgotpassword({ setProgress }) {
     });
 
   return (
-    <div>
+    <div className="auth-container">
       <MetaData title="ShopEasy forgotpassword" />
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -73,74 +73,76 @@ function Forgotpassword({ setProgress }) {
         }}
       >
         <Fade in={open} className="modal-container">
-          <Box>
-            <Container>
-              <ThemeProvider theme={defaultTheme}>
-                <Container
-                  component="main"
-                  maxWidth="xs"
-                  id="transition-modal-description"
-                >
-                  <CssBaseline />
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                      <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h4">
-                      Forgot Password
-                    </Typography>
-                    <Box
-                      component="form"
-                      onSubmit={handleSubmit}
-                      // noValidate
-                      sx={{ fontSize: "1rem", mt: 1 }}
-                    >
-                      <TextField
-                        type="email"
-                        margin="normal"
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        required
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        error={Boolean(touched.email) && Boolean(errors.email)}
-                        helperText={Boolean(touched.email) && errors.email}
-                      />
-                      <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                      >
-                        Continue
-                      </Button>
-                      <Grid container>
-                        <Grid item>
-                          <Typography variant="span">
-                            Remember Password?
-                            <Link to="/"> SignIn</Link>
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Box>
-                  <Copyright sx={{ mt: 4, mb: 2 }} />
-                </Container>
-              </ThemeProvider>
-            </Container>
-          </Box>
+          
         </Fade>
-      </Modal>
+      </Modal> */}
+      <Box>
+        <Container>
+          <ThemeProvider theme={defaultTheme}>
+            <Container
+              component="main"
+              maxWidth="xs"
+              id="transition-modal-description"
+            >
+              <CssBaseline />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  height:"100%"
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h4">
+                  Forgot Password
+                </Typography>
+                <Box
+                  component="form"
+                  onSubmit={handleSubmit}
+                  // noValidate
+                  sx={{ fontSize: "1rem", mt: 1 }}
+                >
+                  <TextField
+                    type="email"
+                    margin="normal"
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    required
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    error={Boolean(touched.email) && Boolean(errors.email)}
+                    helperText={Boolean(touched.email) && errors.email}
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Continue
+                  </Button>
+                  <Grid container>
+                    <Grid item>
+                      <Typography variant="span">
+                        Remember Password?
+                        <Link to="/login"> SignIn</Link>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+              <Copyright sx={{ mt: 2  , mb: 2 }} />
+            </Container>
+          </ThemeProvider>
+        </Container>
+      </Box>
     </div>
   );
 }

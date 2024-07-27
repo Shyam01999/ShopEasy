@@ -34,14 +34,16 @@ function App() {
           onLoaderFinished={() => setProgress(0)}
         />
         <Routes>
-          <Route path="/forgotpassword" element={<Forgotpassword setProgress={setProgress}/>} />
-          <Route path="/resetpassword/:token" element={<Resetpassword setProgress={setProgress}/>} />
+          {/* <Route path="/forgotpassword" element={<Forgotpassword setProgress={setProgress}/>} />
+          <Route path="/resetpassword/:token" element={<Resetpassword setProgress={setProgress}/>} /> */}
 
           <Route path="/" element={<Layout />}>
             <Route index element={<Home setProgress={setProgress}/>} />
-            <Route path="/cart" element={<Cart setProgress={setProgress}/>} />
-            <Route path="/signup" element={<Signup setProgress={setProgress}/>} />
-            <Route path="/login" element={<Login setProgress={setProgress}/>} />
+            <Route path="cart" element={<Cart setProgress={setProgress}/>} />
+            <Route path="signup" element={<Signup setProgress={setProgress}/>} />
+            <Route path="login" element={<Login setProgress={setProgress}/>} />
+            <Route path="forgotpassword" element={<Forgotpassword setProgress={setProgress}/>} />
+          <Route path="resetpassword/:token" element={<Resetpassword setProgress={setProgress}/>} />
           </Route>
           {/* <Route path="/" element={<Home><ProtectRoute /></Home>}> */}
           {/* <Route path="kms" element={<KMS />} />

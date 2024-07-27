@@ -29,7 +29,7 @@ import { openModal } from "../../../redux/action/loginModal.action";
 
 const defaultTheme = createTheme();
 function Signup({ setProgress }) {
-  const [open, setOpen] = useState(true);
+  // const [open, setOpen] = useState(true);
   // const handleOpen = () => setOpen(true);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function Signup({ setProgress }) {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
 
   // const handleSubmit = (event) => {
   //   event.preventDefault();
@@ -76,10 +76,10 @@ function Signup({ setProgress }) {
     });
 
   return (
-    <div>
+    <div className="auth-container">
       <MetaData title="ShopEasy Signup" />
       {/* <Button onClick={handleOpen}>Login Modal</Button> */}
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -91,7 +91,11 @@ function Signup({ setProgress }) {
         }}
       >
         <Fade in={open} className="modal-container">
-          <Box>
+          
+        </Fade>
+      </Modal> */}
+
+      <Box>
             <Container>
               <ThemeProvider theme={defaultTheme}>
                 <Container
@@ -196,27 +200,25 @@ function Signup({ setProgress }) {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ mt: 2, mb: 2 }}
                       >
                         Sign Up
                       </Button>
                       <Grid container>
                         <Grid item>
                           <Typography variant="span">
-                            Already have an account?
-                            <Link to="/">SignIn</Link>
+                            Already have an account ?
+                            <Link to="/login"> SignIn</Link>
                           </Typography>
                         </Grid>
                       </Grid>
                     </Box>
                   </Box>
-                  <Copyright sx={{ mt: 4, mb: 2 }} />
+                  <Copyright sx={{ mt: 2, mb: 1 }} />
                 </Container>
               </ThemeProvider>
             </Container>
           </Box>
-        </Fade>
-      </Modal>
     </div>
   );
 }

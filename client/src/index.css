@@ -82,3 +82,10 @@ footer {
   font-weight: 500;
   /* width: 100%; */
 }
+
+main:has(.auth-container){
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
