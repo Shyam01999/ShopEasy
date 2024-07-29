@@ -19,13 +19,13 @@
   font-weight: 500;
 }
 
-.MuiButton-colorPrimary.commonBtn{
-    background-color: var(--btn-color);
-    color: var(--white-color);
-    border-radius: 1.3rem;
+.MuiButton-colorPrimary.commonBtn {
+  background-color: var(--btn-color);
+  color: var(--white-color);
+  border-radius: 1.3rem;
 }
 
-.headerBtn{
+.headerBtn {
   color: var(--white-color);
 }
 /* header css end */
@@ -60,4 +60,16 @@ button {
   /* color: var(--text-color); */
 }
 
-/* footer css start */
+/*signup css start */
+.profile-container {
+  position: relative;
+}
+
+.profile-image {
+  position: absolute;
+  top: 20%;
+  opacity: 0;
+  cursor: pointer;
+  
+}
+/*signup css end */
