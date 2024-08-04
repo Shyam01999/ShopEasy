@@ -14,7 +14,8 @@ const { password } = require('../../config/dbConfig');
 // // ****************************
 const register = async (req, res) => {
   try {
-    let { username, email, password, mobilenumber, role } = req.body;
+    let { username, email, password, mobilenumber, role, profileimage} = req.body;
+    // console.log("profileimage", profileimage)
     //user default role
     mobilenumber = mobilenumber.toString();
     const defaultrole = 'user';
@@ -38,7 +39,7 @@ const register = async (req, res) => {
     }
 
     // If email and mobile number are unique, proceed with user registration
-    const newUser = await User.create({ username, email, password, mobilenumber, avatar: { public_id: "this is sample id", url: "profilepicurl" }, role });
+    const newUser = await User.create({ username, email, password, mobilenumber, avatar: { public_id: "this is sample id", url: profileimage }, role });
 
     if (newUser) {
       sendToken(email, "Registration Successful", 201, newUser, res)
@@ -96,7 +97,7 @@ const logout = async (req, res, next) => {
       httpOnly: process.env.HTTP_ONLY,
       secure: process.env.COOKIE_SECURE,
       sameSite: 'lax', // Adjust if needed
-      path: '/cart', // Adjust if needed
+      path: '/', // Adjust if needed
     };
     res.status(200).cookie("token", null, options).json({ message: "Loggedout Successfully" })
   }

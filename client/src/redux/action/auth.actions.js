@@ -34,7 +34,11 @@ export const login = (reqbodydata, navigate) => async (dispatch) => {
 //Signup Action
 export const signup = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/auth/register', reqbodydata);
+        const res = await axios.post('http://localhost:8080/api/auth/register', reqbodydata,
+            {
+                withCredentials: true
+            }
+        );
         console.log("signup res", res);
         if (res.statusText == "Created") {
             dispatch({ type: FETCH_SIGNUP_DATA, payload: res.data });
