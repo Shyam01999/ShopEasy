@@ -63,7 +63,7 @@ function Login({ setProgress }) {
     useFormik({
       initialValues: {
         email: "shyamsundarsahoo98@gmail.com",
-        password: "12345678",
+        password: "123456789",
       },
       validationSchema: loginSchema,
       onSubmit: (values, action) => {

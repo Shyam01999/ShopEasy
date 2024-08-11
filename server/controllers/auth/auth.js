@@ -283,7 +283,8 @@ const deleteUser = async (req, res) => {
 const getUserDetails = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
-    res.status(200).json({ success: true, user });
+
+    res.status(200).json({ success: true, userData:user, token:req.cookies.token});
   }
   catch (error) {
     errorMiddleware(error, req, res, next);

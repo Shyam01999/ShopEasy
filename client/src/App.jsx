@@ -18,12 +18,16 @@ import Cart from "./components/Cart/Cart";
 import Banner from "./components/Home/Banner";
 import Layout from "./components/Layout/Layout";
 import LoadingBar from "react-top-loading-bar";
+import { useDispatch } from "react-redux";
+import { userData } from "./redux/action/auth.actions";
 
 function App() {
+  const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
-  // useEffect(()=>{
-  //   notifySuccess("Welcome to Shop Ease App")
-  // },[])
+
+  useEffect(() => {
+    dispatch(userData());
+  }, [dispatch]);
 
   return (
     <>
@@ -38,12 +42,21 @@ function App() {
           <Route path="/resetpassword/:token" element={<Resetpassword setProgress={setProgress}/>} /> */}
 
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home setProgress={setProgress}/>} />
-            <Route path="cart" element={<Cart setProgress={setProgress}/>} />
-            <Route path="signup" element={<Signup setProgress={setProgress}/>} />
-            <Route path="login" element={<Login setProgress={setProgress}/>} />
-            <Route path="forgotpassword" element={<Forgotpassword setProgress={setProgress}/>} />
-          <Route path="resetpassword/:token" element={<Resetpassword setProgress={setProgress}/>} />
+            <Route index element={<Home setProgress={setProgress} />} />
+            <Route path="cart" element={<Cart setProgress={setProgress} />} />
+            <Route
+              path="signup"
+              element={<Signup setProgress={setProgress} />}
+            />
+            <Route path="login" element={<Login setProgress={setProgress} />} />
+            <Route
+              path="forgotpassword"
+              element={<Forgotpassword setProgress={setProgress} />}
+            />
+            <Route
+              path="resetpassword/:token"
+              element={<Resetpassword setProgress={setProgress} />}
+            />
           </Route>
           {/* <Route path="/" element={<Home><ProtectRoute /></Home>}> */}
           {/* <Route path="kms" element={<KMS />} />

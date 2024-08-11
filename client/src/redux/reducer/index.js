@@ -1,12 +1,12 @@
 import { combineReducers } from "redux";
 import loadReducer from "./load.reducers";
-import { authReducer } from "./auth.reducers";
-import loginModalReducer from "./loginModal.reducer";
+// import loginModalReducer from "./loginModal.reducer";
+import { userDataReducer } from "./userData.reducer";
 
 const rootReducer = combineReducers({
-  authManager: authReducer,
   loadReducer: loadReducer,
-  loginModalReducer: loginModalReducer,
+  // loginModalReducer: loginModalReducer,
+  userDataReducer:userDataReducer,
 });
 
 export default rootReducer;

@@ -26,6 +26,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { notifyError, notifySuccess } from "../../../constant/toastAlerts";
+import { backendApi } from "../../../constant/api";
 
 const defaultTheme = createTheme();
 
@@ -53,7 +54,7 @@ function Resetpassword({ setProgress }) {
       onSubmit: async (values, action) => {
         try {
           const res = await axios.put(
-            `http://localhost:8080/api/auth/password/reset/${token}`,
+            `${backendApi}/api/auth/password/reset/${token}`,
             {
               password: values.password,
               confirmPassword: values.confirmPassword,

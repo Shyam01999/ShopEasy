@@ -1,24 +1,18 @@
 import axios from "axios";
 import { notifyError, notifySuccess } from "../../constant/toastAlerts";
-import Cookies from 'js-cookie';
-import { FETCH_FORGOTPASSWORD_DATA, FETCH_LOGIN_DATA, FETCH_LOGOUT_DATA, FETCH_SIGNUP_DATA } from "../actionTypes/auth.actionTypes";
-import { OPEN_LOGIN_MODAL } from "../actionTypes/loginTogle.action";
+import { FETCH_USER_DATA } from "../actionTypes/auth.actionTypes";
+// import { OPEN_LOGIN_MODAL } from "../actionTypes/loginTogle.action";
+import { backendApi } from "../../constant/api";
 
 //Login Action 
 export const login = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/auth/login', reqbodydata,
+        const res = await axios.post(`${backendApi}/api/auth/login`, reqbodydata,
             {
                 withCredentials: true
             });
-        console.log("login res", res)
-        // Optionally, navigate to another page upon successful login
         if (res.data.message == 'Login Successful') {
-            dispatch({ type: FETCH_LOGIN_DATA, payload: res.data });
-            const loginData = res.data;
-            Cookies.set('frontendToken', JSON.stringify(loginData.token), { expires: 7, path: '/' });
-            Cookies.set('userData', JSON.stringify(loginData.userData), { expires: 7, path: '/' });
-            dispatch({ type: OPEN_LOGIN_MODAL, payload: false });
+            dispatch({ type: FETCH_USER_DATA, payload: res.data });
             notifySuccess(res.data.message);
             navigate("/");
         } else {
@@ -34,16 +28,13 @@ export const login = (reqbodydata, navigate) => async (dispatch) => {
 //Signup Action
 export const signup = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/auth/register', reqbodydata,
+        const res = await axios.post(`${backendApi}/api/auth/register`, reqbodydata,
             {
                 withCredentials: true
             }
         );
-        console.log("signup res", res);
         if (res.statusText == "Created") {
-            dispatch({ type: FETCH_SIGNUP_DATA, payload: res.data });
-            const loginData = res.data;
-            // Cookies.set('loginData', JSON.stringify(loginData), { expires: 7, path: '/' });
+            dispatch({ type: FETCH_USER_DATA, payload: res.data });
             notifySuccess(res.data.message);
             navigate("/");
         } else {
@@ -59,9 +50,9 @@ export const signup = (reqbodydata, navigate) => async (dispatch) => {
 //forgot password
 export const forgotpassword = (reqbodydata, navigate) => async (dispatch) => {
     try {
-        const res = await axios.post('http://localhost:8080/api/auth/password/forgot', reqbodydata);
+        const res = await axios.post(`${backendApi}/api/auth/password/forgot`, reqbodydata);
         if (res.statusText == "OK") {
-            dispatch({ type: FETCH_FORGOTPASSWORD_DATA, payload: res.data });
+            dispatch({ type: FETCH_USER_DATA, payload: res.data });
             notifySuccess(res.data.message);
             alert(res.data.message);
         } else {
@@ -78,21 +69,17 @@ export const forgotpassword = (reqbodydata, navigate) => async (dispatch) => {
 //Login Action 
 export const logout = (navigate) => async (dispatch) => {
     try {
-        const res = await axios.get('http://localhost:8080/api/auth/logout',
+        const res = await axios.get(`${backendApi}/api/auth/logout`,
             {
                 withCredentials: true // Important
             });
-        console.log("logout res", res)
-        // Optionally, navigate to another page upon successful login
         if (res.data.message == 'Loggedout Successfully') {
             dispatch({
-                type: FETCH_LOGOUT_DATA, payload: {
+                type: FETCH_USER_DATA, payload: {
                     token: null,
                     userData: {}
                 }
             });
-            Cookies.remove('frontendToken');
-            Cookies.remove('userData');
             notifySuccess(res.data.message);
             navigate("/");
         } else {
@@ -102,5 +89,22 @@ export const logout = (navigate) => async (dispatch) => {
     catch (error) {
         notifyError(`${error}`)
         console.log(`Error in login ${error}`);
+    }
+}
+
+//User Action
+export const userData = () => async (dispatch) => {
+    try {
+        const res = await axios.get(`${backendApi}/api/auth/me`, { withCredentials: true });
+        if (res.data.success) {
+            dispatch({ type: FETCH_USER_DATA, payload: res.data })
+        }
+        else {
+            // 
+            console.log("User not loggedin")
+        }
+    }
+    catch (error) {
+        console.log(`Error while fetching login user data ${error}`);
     }
 }

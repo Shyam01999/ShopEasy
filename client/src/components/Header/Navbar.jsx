@@ -82,8 +82,7 @@ function Navbar({ children }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [searchvalue, setSearchValue] = React.useState("");
 
-  const { userData, token } = useSelector((state) => state.authManager);
-
+  const { userData, token } = useSelector((state) => state.userDataReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -139,8 +138,8 @@ function Navbar({ children }) {
               sx={{
                 display: { xs: "flex", md: "flex" },
                 justifyContent: "flex-end",
-                alignItems:"center",
-                gap:"1rem",
+                alignItems: "center",
+                gap: "1rem",
                 marginLeft: 1,
                 marginInline: 2,
                 color: "#646cff",
