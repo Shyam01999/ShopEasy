@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const db = require("../models/index");
-const errorMiddleware = require('./error-middleware');
 const User = db.User;
 
 const isAuthenticated = async (req, res, next) => {
@@ -21,7 +20,7 @@ const isAuthenticated = async (req, res, next) => {
         next();
     }
     catch (error) {
-        errorMiddleware(error, req, res, next);
+        console.log(error);
     }
 }
 
@@ -33,7 +32,7 @@ const authorizeRole = (...roles) => async (req, res, next) => {
         next();
     }
     catch (error) {
-        errorMiddleware(error);
+        console.log(error);
     }
 }
 

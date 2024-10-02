@@ -1,23 +1,24 @@
 const bcrypt = require('bcryptjs');
 const sendToken = require('../../utils/sendToken');
 const { User } = require("../../models");
-const errorMiddleware = require('../../middleware/error-middleware');
+
 const sendEmail = require('../../utils/sendEmail');
 const crypto = require('crypto');
 const { Op } = require('sequelize');
 const { password } = require('../../config/dbConfig');
+const AppError = require('../../utils/appError');
 
 // const User = db.User;
 
 // // ****************************
 // //   Registration Controller
 // // ****************************
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     let { username, email, password, mobilenumber, role, profileimage} = req.body;
     // console.log("profileimage", profileimage)
     //user default role
-    mobilenumber = mobilenumber.toString();
+    mobilenumber = mobilenumber?.toString();
     const defaultrole = 'user';
     role = role || defaultrole;
 
@@ -29,13 +30,13 @@ const register = async (req, res) => {
     // Check if the email already exists in the database
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.json({ message: 'User with this email already exists' });
+      return next(new AppError('User with this email already exists', 400));
     }
 
     // Check if the mobile number already exists in the database
     const existingMobileUser = await User.findOne({ where: { mobilenumber } });
     if (existingMobileUser) {
-      return res.json({ message: 'User with this mobile number already exists' });
+      return next(new AppError('User with this mobile number already exists', 400));
     }
 
     // If email and mobile number are unique, proceed with user registration
@@ -44,11 +45,12 @@ const register = async (req, res) => {
     if (newUser) {
       sendToken(email, "Registration Successful", 201, newUser, res)
     } else {
-      res.json({ error: 'Registration failed' });
+      // res.json({ error: 'Registration failed' });
+      return next(new AppError('Registration failed', 400));
     }
   } catch (error) {
-    console.error('Error creating user:', error);
-    res.json({ error: 'Internal Server Error' });
+    console.log("error", error)
+    return next(new AppError(error));
   }
 };
 
@@ -102,7 +104,7 @@ const logout = async (req, res, next) => {
     res.status(200).cookie("token", null, options).json({ message: "Loggedout Successfully" })
   }
   catch (error) {
-    // errorMiddleware(error, req, res, next);
+    
     console.log(error)
   }
 }
