@@ -1,0 +1,75 @@
+/* module rule or reuseable component */
+/* header css start */
+.container {
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.commonBtn {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.MuiButton-colorPrimary.commonBtn {
+  background-color: var(--btn-color);
+  color: var(--white-color);
+  border-radius: 1.3rem;
+}
+
+.headerBtn {
+  color: var(--white-color);
+}
+/* header css end */
+button {
+  text-transform: capitalize;
+  padding: 1rem 2.2rem;
+  font-size: 1.7rem;
+  font-weight: 500;
+  background-color: var(--btn-color);
+  color: var(--bg-color);
+  border-radius: 0.8rem;
+  border: 0.1rem solid transparent;
+  cursor: pointer;
+  letter-spacing: 0.1rem;
+  transition: border-color 0.3s;
+}
+
+.secondary-btn {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 0.2rem var(--btn-color);
+  margin-left: 3.2rem;
+}
+
+.logoutBtn {
+  display: inline-block;
+  margin: 0rem 2rem;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 1.5rem;
+  /* color: var(--text-color); */
+}
+
+/*signup css start */
+.profile-container {
+  position: relative;
+}
+
+.profile-image {
+  position: absolute;
+  top: 20%;
+  opacity: 0;
+  cursor: pointer;
+  
+}
+/*signup css end */

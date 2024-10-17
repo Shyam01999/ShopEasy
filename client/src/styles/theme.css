@@ -1,0 +1,19 @@
+/* Theme Rule */
+:root {
+  --header-color: #eef7ff;
+  --bg-color: #1f242d;
+  --body-color: #f1f3f6;
+  --text-color: #000000;
+  --logo-color: #12d8fa;
+  --main-color: linear-gradient(to right, 0%, #12d8fa 51%, #1fa2ff 100%);
+  --btn-color: #646cff;
+  --white-color: #fff;
+  --hover-color: #1fa2ff;
+  --menu-color: #2af598;
+  --fb-logo: #0866ff;
+
+  --modal-bg-color: #ffff;
+  --modal-bd-color: #000;
+  --modal-text-color: #000;
+  --footer-color: #e7f0dc;
+}

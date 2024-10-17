@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital@0;1&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&family=Open+Sans:ital@0;1&family=Permanent+Marker&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  scroll-behavior: smooth;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Base Rule */
+/* html {
+  font-size: 62.5%; 
+} */
+
+body {
+  min-height: 100vh;
+  background-color: var(--body-color);
+}
+
+h1 {
+  /* font-family: 'Kalam', cursive; */
+  /* font-family: 'Permanent Marker', cursive; */
+  font-size: 5.4rem;
+  line-height: 1.1;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+p,
+li,
+label,
+input,
+textarea {
+  font-size: 1.8rem;
+  line-height: 1.56;
+  letter-spacing: 0.1rem;
+  word-spacing: 0.06rem;
+  border: none;
+  list-style: none;
+}
+
+ul {
+  display: flex;
+  gap: 3.2rem;
+}
+
+a {
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  color: var(--btn-color);
+  text-decoration: inherit;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  background-color: var(--btn-color);
+  color: var(--bg-color);
+  font-size: 1.4rem;
+  font-weight: 500;
+  /* width: 100%; */
+}
+
+main:has(.auth-container){
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
