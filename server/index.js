@@ -47,7 +47,7 @@ app.use(passport.session());
 
 passport.use(
   new OAuth2Strategy({
-    clientID: "",
+    clientID: "206705606502-d2duo4rhqajkv1dokea3fflr72tti8ej.apps.googleusercontent.com",
     clientSecret: "",
     callbackURL: '/auth/google/callback',
     scope: ['profile', 'email'],
