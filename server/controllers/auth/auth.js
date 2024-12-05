@@ -7,12 +7,9 @@ const crypto = require('crypto');
 const { Op } = require('sequelize');
 const { password } = require('../../config/dbConfig');
 const AppError = require('../../utils/appError');
-
 // const User = db.User;
 
-// // ****************************
-// //   Registration Controller
-// // ****************************
+// Registration Controller
 const register = async (req, res, next) => {
   try {
     let { username, email, password, mobilenumber, role, profileimage } = req.body;
@@ -53,9 +50,7 @@ const register = async (req, res, next) => {
   }
 };
 
-// // ****************************
-// //   Login Controller
-// // ****************************
+// Login Controller
 const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -86,9 +81,7 @@ const login = async (req, res, next) => {
   }
 }
 
-// // ****************************
-// //   Logout Controller
-// // ****************************
+// Logout Controller
 const logout = async (req, res, next) => {
   try {
     const options = {
@@ -113,9 +106,8 @@ const logout = async (req, res, next) => {
   }
 }
 
-// // ****************************
-// //   Forgot password Controller
-// // ****************************
+
+//   Forgot password Controller
 const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
@@ -161,9 +153,7 @@ const forgotPassword = async (req, res, next) => {
   }
 }
 
-// // ****************************
-// //   Reset Password Controller
-// // ****************************
+//Reset Password Controller
 const resetPassword = async (req, res, next) => {
   //creating token hash 
   const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
@@ -328,9 +318,6 @@ const updatePassword = async (req, res, next) => {
     errorMiddleware(error, req, res, next);
   }
 }
-
-
-
 
 // Export controller functions
 module.exports = {
