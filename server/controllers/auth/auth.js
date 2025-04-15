@@ -92,8 +92,8 @@ const logout = async (req, res, next) => {
       path: '/', // Adjust if needed
     };
 
-    req.logout(function(error){
-      if(error){
+    req.logout(function (error) {
+      if (error) {
         return next(error)
       }
 
@@ -105,7 +105,6 @@ const logout = async (req, res, next) => {
     return next(new AppError(error, 500));
   }
 }
-
 
 //   Forgot password Controller
 const forgotPassword = async (req, res, next) => {
