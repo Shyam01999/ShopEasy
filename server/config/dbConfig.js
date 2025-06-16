@@ -1,13 +1,13 @@
 require("dotenv").config();
 
 module.exports = {
-  host: process.env.HOST,
-  username: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DBNAME,
-  port: process.env.DBPORT,
-  dialect: process.env.DIALECT,
-  logging: parseBoolean(process.env.LOGGING),
+  host: process.env.DB_HOST || "localhost",
+  username: process.env.DB_USER || "postgres",
+  password: process.env.DB_PASSWORD || "123456",
+  database: process.env.DB_NAME || "Shopeasy_DB",
+  port: process.env.DB_PORT || "5432",
+  dialect: process.env.DB_DIALECT || "postgresql",
+  logging: parseBoolean(process.env.DB_LOGGING || false),
   // ssl: parseBoolean(process.env.SSL),
   // dialectOptions: {
   //   ssl: {
